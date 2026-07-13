@@ -62,7 +62,7 @@ def find_doi(text):
 def main():
     ap = argparse.ArgumentParser(description="PDF → LIT card via DOI regex + Crossref")
     ap.add_argument("pdf", help="PDF path")
-    ap.add_argument("--by", default=os.environ.get("LABOS_USER") or os.environ.get("USER") or "me")
+    ap.add_argument("--by", default=os.environ.get("AGENT_ELN_USER") or os.environ.get("USER") or "me")
     ap.add_argument("--extractor", default="markitdown", choices=["markitdown"])
     ap.add_argument("--doi", help="manually specify DOI (skip extraction)")
     ap.add_argument("--text-file", help="for testing: directly read a .txt/.md as extraction result")

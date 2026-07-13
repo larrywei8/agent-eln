@@ -1,4 +1,4 @@
-# lab-os
+# agent-eln
 
 An **AI-native lab operating system**: an Electronic Lab Notebook (ELN), a knowledge wiki, and
 a stub Laboratory Information Management System (LIMS), stored as plain Markdown + a small
@@ -8,7 +8,7 @@ Any AI agent that clones this repo can operate it. There is no database engine, 
 just files, `git`, and a handful of scripts.
 
 ```
-lab-os/
+agent-eln/
 ├── eln/     electronic lab notebook — experiments, protocols, resources, literature
 ├── wiki/    knowledge base — concepts, entities, paper summaries
 └── lims/    laboratory information management (stub — planned)
@@ -17,8 +17,8 @@ lab-os/
 ## Quick start
 
 ```bash
-git clone <your-fork-url> lab-os
-cd lab-os
+git clone <your-fork-url> agent-eln
+cd agent-eln
 cp config.example.toml config.toml   # optional; env vars work too
 pip install -r eln/requirements.txt
 
@@ -42,10 +42,10 @@ zero configuration — sensible defaults let you clone and go.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
-| `LABOS_USER` | Default author for `--by` flags | `$USER` |
-| `LABOS_CONTACT_EMAIL` | Polite contact for Crossref / external APIs | `labos-agent@example.org` |
-| `LABOS_WIKI_URL_PREFIX` | URL prefix for links into your wiki | *(empty — plain paths)* |
-| `LABOS_REPO_ROOT` | Override auto-detected repo root | *(auto)* |
+| `AGENT_ELN_USER` | Default author for `--by` flags | `$USER` |
+| `AGENT_ELN_CONTACT_EMAIL` | Polite contact for Crossref / external APIs | `agent-eln@example.org` |
+| `AGENT_ELN_WIKI_URL_PREFIX` | URL prefix for links into your wiki | *(empty — plain paths)* |
+| `AGENT_ELN_REPO_ROOT` | Override auto-detected repo root | *(auto)* |
 
 ## What's included
 

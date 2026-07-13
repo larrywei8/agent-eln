@@ -1004,7 +1004,7 @@ def crossref_check_published(doi, timeout=8):
     import urllib.request
     import urllib.error
     url = f"https://api.crossref.org/works/{doi}"
-    _contact = os.environ.get("LABOS_CONTACT_EMAIL", "labos-agent@example.org")
+    _contact = os.environ.get("AGENT_ELN_CONTACT_EMAIL", "agent-eln@example.org")
     req = urllib.request.Request(url, headers={"User-Agent": f"knowledge-pm/1.0 (mailto:{_contact})"})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:

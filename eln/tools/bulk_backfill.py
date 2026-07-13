@@ -87,7 +87,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="list candidates only, do not actually create cards")
     ap.add_argument("--limit", type=int, default=0, help="process at most N items (0 = unlimited)")
     ap.add_argument("--sleep", type=float, default=1.0, help="sleep seconds after each call (rate-limit)")
-    ap.add_argument("--by", default=os.environ.get("LABOS_USER") or os.environ.get("USER") or "me")
+    ap.add_argument("--by", default=os.environ.get("AGENT_ELN_USER") or os.environ.get("USER") or "me")
     ap.add_argument("--stub-only", action="store_true", help="always use stub mode (no external API calls)")
     args = ap.parse_args()
 

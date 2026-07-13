@@ -113,7 +113,7 @@ ap.add_argument("type")
 ap.add_argument("--name", default="")
 ap.add_argument("--title", default="")
 ap.add_argument("--slug", default="", help="Explicit short slug, appended to file/folder name (takes precedence over slugs derived from --name/--title)")
-ap.add_argument("--by", default=os.environ.get("LABOS_USER") or os.environ.get("USER") or "me")
+ap.add_argument("--by", default=os.environ.get("AGENT_ELN_USER") or os.environ.get("USER") or "me")
 ap.add_argument("--date", default=datetime.date.today().isoformat())
 ap.add_argument("--print", dest="just_print", action="store_true", help="Print md content only, do not write to disk")
 ap.add_argument("--dry-run", dest="dry_run", action="store_true",

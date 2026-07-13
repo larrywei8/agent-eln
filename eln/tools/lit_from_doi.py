@@ -61,7 +61,7 @@ def lookup_dup(doi):
 def fetch_crossref(doi, timeout=15):
     import config as _cfg
     url = f"https://api.crossref.org/works/{doi}"
-    req = _urlreq.Request(url, headers={"User-Agent": f"lab-os-lit-ingest/0.1 (mailto:{_cfg.CONTACT_EMAIL})"})
+    req = _urlreq.Request(url, headers={"User-Agent": f"agent-eln-lit-ingest/0.1 (mailto:{_cfg.CONTACT_EMAIL})"})
     with _urlreq.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
 
@@ -175,7 +175,7 @@ def append_daylog(rid, doi, title):
 def main():
     ap = argparse.ArgumentParser(description="DOI → LIT card")
     ap.add_argument("doi", help="bare DOI or https://doi.org/... URL")
-    ap.add_argument("--by", default=os.environ.get("LABOS_USER") or os.environ.get("USER") or "me")
+    ap.add_argument("--by", default=os.environ.get("AGENT_ELN_USER") or os.environ.get("USER") or "me")
     ap.add_argument("--stub", action="store_true", help="do not query Crossref, build skeleton only")
     ap.add_argument("--wiki-link", default="", help="wiki summary repo-relative path, e.g.: wiki/summaries/foo.md")
     ap.add_argument("--no-index", action="store_true", help="skip final index.py (for testing)")

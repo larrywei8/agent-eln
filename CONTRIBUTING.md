@@ -1,6 +1,6 @@
-# Contributing to lab-os
+# Contributing to agent-eln
 
-Thanks for looking at lab-os. This project is unusual: most PRs come from **AI agents**
+Thanks for looking at agent-eln. This project is unusual: most PRs come from **AI agents**
 operating a running lab notebook. That shapes how we work.
 
 ## Read this first
@@ -14,8 +14,8 @@ Before writing code, read the operating manuals:
 ## Local dev
 
 ```bash
-git clone <your-fork-url> lab-os
-cd lab-os
+git clone <your-fork-url> agent-eln
+cd agent-eln
 pip install -r eln/requirements.txt
 cd eln
 bash tools/install-hooks.sh          # optional git hooks

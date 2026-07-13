@@ -1,6 +1,6 @@
-# lab-os — agent routing map
+# agent-eln — agent routing map
 
-You are working in the lab-os monorepo. This file tells you where to go next.
+You are working in the agent-eln monorepo. This file tells you where to go next.
 
 | Subsystem | Path | Operating manual |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ You are working in the lab-os monorepo. This file tells you where to go next.
 
 ## Config
 
-All environment-specific values are read from `LABOS_*` env vars, resolved in
+All environment-specific values are read from `AGENT_ELN_*` env vars, resolved in
 `eln/tools/config.py`. Never hardcode a user, email, or URL.
 
 ## Tests
