@@ -1,18 +1,26 @@
 # agent-eln
 
-An **AI-native lab operating system**: an Electronic Lab Notebook (ELN), a knowledge wiki, and
-a stub Laboratory Information Management System (LIMS), stored as plain Markdown + a small
-Python toolkit.
+An **AI-native lab operating system**: an Electronic Lab Notebook (ELN), a Laboratory
+Information Management System (LIMS), and a knowledge wiki — all stored as plain
+Markdown + a small Python toolkit.
 
 Any AI agent that clones this repo can operate it. There is no database engine, no server —
 just files, `git`, and a handful of scripts.
 
 ```
 agent-eln/
-├── eln/     electronic lab notebook — experiments, protocols, resources, literature
-├── wiki/    knowledge base — concepts, entities, paper summaries
-└── lims/    laboratory information management (stub — planned)
+├── eln/     activities — experiments, meetings, ideas, projects, protocols, literature, ...
+├── lims/    inventory — plasmids, oligos, samples, mice, cell lines, reagents, instruments, ...
+├── wiki/    knowledge — concepts, entities, paper summaries
+├── tools/   shared toolkit (one CLI, one registry, one provenance graph)
+└── templates/  record templates
 ```
+
+**Mental model.** ELN records *things that happen*: an experiment you ran, a meeting you had,
+an idea you had. LIMS records *things you have*: the plasmid on the bench, the mouse in the
+cage, the reagent in the freezer. The provenance graph connects them — every experiment can
+declare `used_resources` / `produced_resources`, and the LIMS records get an auto-backfilled
+`produced_in` link.
 
 ## Quick start
 
@@ -20,17 +28,17 @@ agent-eln/
 git clone <your-fork-url> agent-eln
 cd agent-eln
 cp config.example.toml config.toml   # optional; env vars work too
-pip install -r eln/requirements.txt
+pip install -r requirements.txt
 
-# operate the ELN
-cd eln
+# operate the system
 bash tools/install-hooks.sh
-python tools/new.py plasmid --name "pAAV-CAG-EGFP"
+python tools/new.py plasmid --name "pAAV-CAG-EGFP"     # -> lims/plasmids/
+python tools/new.py experiment --title "cloning test"  # -> eln/experiments/
 python tools/index.py
 python tools/dashboard.py
 ```
 
-Read **`eln/AGENT.md`** next. That is the operating manual an AI agent needs to run this
+Read **`AGENT.md`** next. That is the operating manual an AI agent needs to run this
 system end-to-end.
 
 ## Configuration
@@ -46,19 +54,20 @@ zero configuration — sensible defaults let you clone and go.
 | `AGENT_ELN_CONTACT_EMAIL` | Polite contact for Crossref / external APIs | `agent-eln@example.org` |
 | `AGENT_ELN_WIKI_URL_PREFIX` | URL prefix for links into your wiki | *(empty — plain paths)* |
 | `AGENT_ELN_REPO_ROOT` | Override auto-detected repo root | *(auto)* |
+| `AGENT_ELN_ELN_DIR` / `AGENT_ELN_LIMS_DIR` / `AGENT_ELN_WIKI_DIR` | Rename the three module dirs | `eln` / `lims` / `wiki` |
 
 ## What's included
 
 | Subsystem | Docs | Highlights |
 | --- | --- | --- |
-| ELN | `eln/AGENT.md`, `eln/README.md`, `eln/ROADMAP.md` | 26 record types, DOI-deduped literature, provenance graph, HTML dashboard |
+| ELN | `AGENT.md`, `eln/AGENTS.md` | 10 activity record types, DOI-deduped literature, provenance graph, HTML dashboard |
+| LIMS | `lims/AGENTS.md` | 16 inventory record types with expiry / status / location tracking |
 | Wiki | `wiki/ANYGEN.md` | Vicky-style summaries, concepts, entities, bidirectional links to literature |
-| LIMS | `lims/README.md` | Stub — planned (inventory + chain of custody) |
 
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). The ELN test suite lives at
-`eln/tools/tests/`; run it with `cd eln && python -m unittest discover -s tools/tests -v`.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). The test suite lives at `tools/tests/`;
+run it with `python -m unittest discover -s tools/tests -v`.
 
 ## License
 

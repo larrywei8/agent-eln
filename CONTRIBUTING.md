@@ -7,29 +7,29 @@ operating a running lab notebook. That shapes how we work.
 
 Before writing code, read the operating manuals:
 
-- `eln/AGENT.md` — how any agent should operate the ELN
-- `eln/conventions.md` — ID / naming rules
-- `eln/hierarchy.md` — record-type hierarchy
+- `AGENT.md` — how any agent should operate the system
+- `AGENTS.md` — top-level routing map (eln / lims / wiki)
+- `conventions.md` — ID / naming rules
+- `hierarchy.md` — record-type hierarchy
 
 ## Local dev
 
 ```bash
 git clone <your-fork-url> agent-eln
 cd agent-eln
-pip install -r eln/requirements.txt
-cd eln
+pip install -r requirements.txt
 bash tools/install-hooks.sh          # optional git hooks
 python -m unittest discover -s tools/tests -v
 ```
 
-The ELN test suite lives under `eln/tools/tests/`. New tool code should come with a test.
+The test suite lives under `tools/tests/`. New tool code should come with a test.
 
 ## PR shape
 
-- One concern per PR. `eln/tools/` and `wiki/scripts/` are the code — the rest is data.
+- One concern per PR. `tools/` and `wiki/scripts/` are the code — the rest is data.
 - Do **not** commit personal records (real experiments, real DOIs from your lab, real people)
-  into the repo. Use fixtures under `eln/tools/tests/`.
-- Do **not** commit anything to `eln/raw/`, `wiki/raw/`, or `wiki/files/` — those are
+  into the repo. Use fixtures under `tools/tests/`.
+- Do **not** commit anything to `raw/`, `wiki/raw/`, or `wiki/files/` — those are
   gitignored on purpose.
 
 ## Reporting bugs

@@ -13,20 +13,22 @@ venv/
 *.egg-info/
 
 # indexes are regenerated from source of truth
-eln/index/*.csv
-eln/index/*.json
-eln/index/*.duckdb
-eln/index/*.html
-eln/index/.cache/
+index/*.csv
+index/*.json
+index/*.duckdb
+index/*.html
+index/.cache/
 eln/reports/
 
 # raw / large-file directories — track structure, not contents
-eln/raw/**
-!eln/raw/README.md
-!eln/raw/.gitkeep
+raw/**
+!raw/README.md
+!raw/.gitkeep
 wiki/raw/**
 !wiki/raw/README.md
 !wiki/raw/.gitkeep
+wiki/files/**
+!wiki/files/.gitkeep
 
 # editor / OS junk
 .DS_Store
