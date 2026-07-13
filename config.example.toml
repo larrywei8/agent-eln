@@ -16,8 +16,9 @@ contact_email = "agent-eln@example.org"
 # Example: "https://your-host.example.com/?f="
 wiki_url_prefix = ""
 
-# AGENT_ELN_ELN_DIR / AGENT_ELN_LIMS_DIR / AGENT_ELN_WIKI_DIR — directory names inside the repo.
-# Change only if you renamed the top-level folders.
-eln_dir  = "eln"
-lims_dir = "lims"
-wiki_dir = "wiki"
+# AGENT_ELN_ELN_DIR / AGENT_ELN_LIMS_DIR / AGENT_ELN_METHODS_DIR / AGENT_ELN_WIKI_DIR
+# — directory names inside the repo. Change only if you renamed the top-level folders.
+eln_dir     = "eln"
+lims_dir    = "lims"
+methods_dir = "methods"
+wiki_dir    = "wiki"

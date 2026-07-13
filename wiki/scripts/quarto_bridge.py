@@ -17,7 +17,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-ROOT = Path("/home/workspace/knowledge")
+# Default to the wiki module inside agent-eln (this script lives at wiki/scripts/).
+# Override with --root when running against a different wiki repo.
+ROOT = Path(__file__).resolve().parent.parent
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\((<[^>]+>|[^)\s]+)(?:\s+\"[^\"]*\")?\)")
 PROMOTE_RE = re.compile(r"<!--\s*wiki-promote:\s*start\s*-->(.*?)<!--\s*wiki-promote:\s*end\s*-->", re.DOTALL | re.I)
 

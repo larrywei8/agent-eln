@@ -80,7 +80,7 @@ def _extract(meta, rel):
 # ---- Walk (sorted walk for CSV row order stable across machines and runs) -------------------
 for dirpath, dnames, files in os.walk(ROOT):
     dnames.sort()  # in-place, affects subsequent descent order
-    if any(s in dirpath for s in (".git", "/index", "/templates", "/tools", "/wiki", "/raw", "/docs", "/references", "/inbox")):
+    if R.is_excluded(dirpath):
         continue
     for fn in sorted(files):
         if not fn.endswith(".md"):

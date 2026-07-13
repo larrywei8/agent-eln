@@ -8,7 +8,7 @@ operating a running lab notebook. That shapes how we work.
 Before writing code, read the operating manuals:
 
 - `AGENT.md` — how any agent should operate the system
-- `AGENTS.md` — top-level routing map (eln / lims / wiki)
+- `AGENTS.md` — top-level routing map (eln / lims / methods / wiki)
 - `conventions.md` — ID / naming rules
 - `hierarchy.md` — record-type hierarchy
 

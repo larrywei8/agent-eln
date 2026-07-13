@@ -1,6 +1,6 @@
 # ELN Roadmap
 
-**Current schema:** v4.0 (26 record types — see `python3 tools/registry.py table`).
+**Current schema:** v6.0 (see `python3 tools/registry.py table` for the current type list).
 **Last baseline commit:** `b56d0b5` — Phase 4 baseline (2026-07-13).
 **Scope reminder:** this ELN is a **single-lab research knowledge system**, not a
 regulated LIMS. Design choices favor scientific reproducibility, provenance, and
@@ -36,7 +36,8 @@ the single-lab research scope.
   `PROT` → `SOP`.
 - `AGENT.md`: removed broken `DESIGN.md` reference.
 - Moved `BASELINE.md`, `SPEC-phase1.md`, `SPEC-phase3.md` → `docs/history/`.
-- Added `SCHEMA_VERSION = "4.0"` to `tools/registry.py`.
+- Added `SCHEMA_VERSION` to `tools/registry.py` (bumped to `"6.0"` after the
+  Phase 4 baseline and the `methods/` module split).
 - Added `tools/tests/test_doc_consistency.py` (5 tests) that fails CI if the
   Skill drifts from the registry or retired prefixes reappear in live docs.
 
