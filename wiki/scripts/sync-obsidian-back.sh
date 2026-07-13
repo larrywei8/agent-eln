@@ -1,26 +1,29 @@
 #!/usr/bin/env bash
 set -u -o pipefail
 
-ROOT="/home/workspace/knowledge"
-SKILL="/home/workspace/Skills/llm-wiki-anygen"
-BACKUP_ROOT="/home/workspace/Archive/obsidian-sync-backups"
+# Default ROOT resolves to the repo root (agent-eln/), which contains wiki/.
+# Override with --root or AGENT_ELN_WIKI_ROOT if your wiki lives elsewhere.
+_HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="${AGENT_ELN_WIKI_ROOT:-$(cd "$_HERE/../.." && pwd)}"
+SKILL="${LLM_WIKI_ANYGEN:-/home/workspace/Skills/llm-wiki-anygen}"
+BACKUP_ROOT="${AGENT_ELN_OBSIDIAN_BACKUP_ROOT:-$ROOT/.obsidian-sync-backups}"
 REPORT_ROOT="$ROOT/outputs/obsidian-sync"
 APPLY=0
 RUN_LINT=1
 
 usage() {
   cat <<USAGE
-sync-obsidian-back.sh — prepare Obsidian edits for the Zo wiki
+sync-obsidian-back.sh — prepare Obsidian edits for the wiki
 
 Usage:
-  bash knowledge/scripts/sync-obsidian-back.sh [--apply] [--root /home/workspace/knowledge] [--no-lint]
+  bash wiki/scripts/sync-obsidian-back.sh [--apply] [--root <path-with-wiki/>] [--no-lint]
 
 Default mode is dry-run: it reports wikilinks that would be converted and does not edit files.
 Use --apply to:
-  1. Back up the current knowledge folder to Archive/obsidian-sync-backups/
-  2. Convert Obsidian [[wikilinks]] under knowledge/wiki/ to standard Markdown links
+  1. Back up the current wiki tree under \$ROOT/.obsidian-sync-backups/ (override with AGENT_ELN_OBSIDIAN_BACKUP_ROOT)
+  2. Convert Obsidian [[wikilinks]] under \$ROOT/wiki/ to standard Markdown links
   3. Run the llm-wiki-anygen wiki linter
-  4. Write logs under knowledge/outputs/obsidian-sync/
+  4. Write logs under \$ROOT/outputs/obsidian-sync/
 USAGE
 }
 

@@ -29,11 +29,12 @@ You are working in the agent-eln monorepo. This file tells you where to go next.
 
 All environment-specific values are read from `AGENT_ELN_*` env vars, resolved in
 `tools/config.py`. Never hardcode a user, email, or URL. The four module directory names
-(`eln`, `lims`, `methods`, `wiki`) can be overridden with `AGENT_ELN_ELN_DIR` /
-`_LIMS_DIR` / `_METHODS_DIR` / `_WIKI_DIR`.
+(`eln`, `lims`, `methods`, `wiki`) are fixed — `tools/registry.py` uses those literal
+names when computing record paths, so renaming them via env var is not currently
+supported.
 
 ## Tests
 
 ```bash
-python -m unittest discover -s tools/tests -v
+pytest tools/tests/ -v
 ```

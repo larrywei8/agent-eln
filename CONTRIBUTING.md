@@ -19,7 +19,7 @@ git clone <your-fork-url> agent-eln
 cd agent-eln
 pip install -r requirements.txt
 bash tools/install-hooks.sh          # optional git hooks
-python -m unittest discover -s tools/tests -v
+pytest tools/tests/ -v
 ```
 
 The test suite lives under `tools/tests/`. New tool code should come with a test.

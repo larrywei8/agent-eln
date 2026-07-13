@@ -1,9 +1,9 @@
 """Phase 3 test suite —— literature closed loop (LIT ingest + wiki sync + health).
 
-How to run (from Projects/ELN):
-    python -m unittest tools.tests.test_phase3 -v
+How to run (from the repo root):
+    pytest tools/tests/test_phase3.py -v
 
-Each test runs in a temporary sandbox, without polluting the real library or knowledge/wiki.
+Each test runs in a temporary sandbox, without polluting the real library or the wiki.
 Crossref network calls are monkey-patched; no network required.
 """
 import os, sys, shutil, subprocess, tempfile, unittest, json, re, importlib.util

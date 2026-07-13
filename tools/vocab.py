@@ -1,6 +1,6 @@
 """vocab.py — parse vocab.md (controlled vocabulary + segment codes).
 
-Reads /home/workspace/Projects/ELN/vocab.md at import time and exposes:
+Reads the repo-root `vocab.md` at import time and exposes:
 
   SAMPLE_TYPES       set[str]   — allowed sample_type values
   SOURCE_TISSUES     set[str]   — allowed source_tissue values

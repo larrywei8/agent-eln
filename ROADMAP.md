@@ -5,7 +5,9 @@
 **Scope reminder:** this ELN is a **single-lab research knowledge system**, not a
 regulated LIMS. Design choices favor scientific reproducibility, provenance, and
 literature integration over multi-user transaction safety, chain-of-custody, or
-GxP audit compliance. Historical phase specs are in `docs/history/`.
+GxP audit compliance. Historical phase specs (`BASELINE.md`, `SPEC-phase1.md`,
+`SPEC-phase3.md`) were retired once their content was folded into this roadmap;
+consult git history if you need them.
 
 The evaluation from 2026-07-13 (external audit) scored the system:
 
@@ -35,7 +37,8 @@ the single-lab research scope.
 - `templates/daily-summary.md` and `templates/experiment-wetlab.md`:
   `PROT` → `SOP`.
 - `AGENT.md`: removed broken `DESIGN.md` reference.
-- Moved `BASELINE.md`, `SPEC-phase1.md`, `SPEC-phase3.md` → `docs/history/`.
+- Retired `BASELINE.md`, `SPEC-phase1.md`, `SPEC-phase3.md` after their content
+  was folded into this roadmap (still recoverable via git history).
 - Added `SCHEMA_VERSION` to `tools/registry.py` (bumped to `"6.0"` after the
   Phase 4 baseline and the `methods/` module split).
 - Added `tools/tests/test_doc_consistency.py` (5 tests) that fails CI if the
@@ -123,5 +126,6 @@ expected parent, cycles) — but not before there's real data motivating it.
   `python3 tools/registry.py table` and re-run tests.
 - Bump `SCHEMA_VERSION` in `registry.py` whenever the type list or a prefix
   changes.
-- Historical phase specs live in `docs/history/` — they explain *why* the
-  system looks the way it does but are frozen; don't edit them.
+- Historical phase specs (`BASELINE.md`, `SPEC-phase1.md`, `SPEC-phase3.md`)
+  are retired; if you need to understand *why* an earlier design choice was
+  made, consult git history rather than re-authoring them.

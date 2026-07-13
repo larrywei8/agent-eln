@@ -13,7 +13,7 @@ status: to-read       # to-read → reading → read
 relation:             # optional — supports | contradicts | method-from | background | motivates | replicates | safety
 created: {DATE}
 created_by:
-wiki_link:            # knowledge/wiki/summaries/<slug>.md (relative to workspace root)
+wiki_link:            # wiki/summaries/<slug>.md (relative to the repo root)
 related_experiments: []
 related_ideas: []
 related_projects: []

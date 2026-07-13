@@ -10,10 +10,11 @@ Environment variables (all optional):
   AGENT_ELN_CONTACT_EMAIL     -- polite contact for external APIs    (default: "agent-eln@example.org")
   AGENT_ELN_WIKI_URL_PREFIX   -- URL prefix for wiki summary links   (default: "" -> emits plain path)
   AGENT_ELN_REPO_ROOT         -- absolute path to repo root          (default: auto-detected from this file)
-  AGENT_ELN_ELN_DIR           -- eln (activities) directory name     (default: "eln")
-  AGENT_ELN_LIMS_DIR          -- lims (inventory) directory name     (default: "lims")
-  AGENT_ELN_METHODS_DIR       -- methods (how-to) directory name     (default: "methods")
-  AGENT_ELN_WIKI_DIR          -- wiki directory name                 (default: "wiki")
+
+Note: the four module directory names (`eln`, `lims`, `methods`, `wiki`) are
+intentionally fixed — `tools/registry.py` uses those literal names when
+computing record paths, so the *_DIR variables below are for internal
+composition only and should not be overridden.
 """
 import os
 

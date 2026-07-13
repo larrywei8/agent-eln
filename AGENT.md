@@ -17,8 +17,7 @@ graph, one CLI:
 
 > Companion specs: `conventions.md` (IDs and naming), `hierarchy.md` (tiered compound-ID
 > model), `vocab.md` (controlled vocabulary for `sample_type` / `source_tissue` /
-> segment codes), `ROADMAP.md` (current phase, planned work, historical specs at
-> `docs/history/`).
+> segment codes), `ROADMAP.md` (current phase and planned work).
 
 ## 0. System mental model
 - **File system = database**: each record = a `.md` file with a unique ID (resource-type
@@ -312,7 +311,7 @@ The tool will:
 **One-shot manual batch replace of references elsewhere** (the tool prints this command
 verbatim at the end):
 ```bash
-grep -rl --include='*.md' -e 'EXP-XXX-<old>' Projects/ELN \
+grep -rl --include='*.md' -e 'EXP-XXX-<old>' . \
    | xargs sed -i 's|EXP-XXX-<old>|EXP-XXX-<new>|g'
 ```
 

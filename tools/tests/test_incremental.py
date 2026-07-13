@@ -1,7 +1,7 @@
 """Phase 1 test suite —— incremental cache + DuckDB smoke.
 
-How to run (from Projects/ELN):
-    python -m unittest tools.tests.test_incremental -v
+How to run (from the repo root):
+    pytest tools/tests/test_incremental.py -v
 
 Each test copies the whole ELN to a tmp directory and runs there, without polluting the real library.
 """

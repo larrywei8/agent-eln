@@ -33,8 +33,7 @@ get an auto-backfilled `produced_in` link.
 ```bash
 git clone <your-fork-url> agent-eln
 cd agent-eln
-cp config.example.toml config.toml   # optional; env vars work too
-pip install -r requirements.txt
+pip install -r requirements.txt   # optional; core tools use only the Python stdlib
 
 # operate the system
 bash tools/install-hooks.sh
@@ -50,9 +49,8 @@ system end-to-end.
 ## Configuration
 
 All environment-specific values (your name, contact email, wiki URL prefix) are read from
-environment variables so the code has no personal identifiers. See
-[`config.example.toml`](config.example.toml) for the full list. The tools also run with
-zero configuration — sensible defaults let you clone and go.
+environment variables so the code has no personal identifiers. The tools run with zero
+configuration — sensible defaults let you clone and go.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
@@ -60,7 +58,6 @@ zero configuration — sensible defaults let you clone and go.
 | `AGENT_ELN_CONTACT_EMAIL` | Polite contact for Crossref / external APIs | `agent-eln@example.org` |
 | `AGENT_ELN_WIKI_URL_PREFIX` | URL prefix for links into your wiki | *(empty — plain paths)* |
 | `AGENT_ELN_REPO_ROOT` | Override auto-detected repo root | *(auto)* |
-| `AGENT_ELN_ELN_DIR` / `AGENT_ELN_LIMS_DIR` / `AGENT_ELN_METHODS_DIR` / `AGENT_ELN_WIKI_DIR` | Rename the four module dirs | `eln` / `lims` / `methods` / `wiki` |
 
 ## What's included
 
@@ -74,7 +71,7 @@ zero configuration — sensible defaults let you clone and go.
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md). The test suite lives at `tools/tests/`;
-run it with `python -m unittest discover -s tools/tests -v`.
+run it with `pytest tools/tests/ -v`.
 
 ## License
 

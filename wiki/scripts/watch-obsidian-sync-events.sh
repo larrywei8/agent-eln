@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="${1:-/home/workspace/knowledge}"
+# Default ROOT resolves to the repo root (agent-eln/), which contains wiki/.
+# Pass an explicit path as arg 1 if your wiki lives elsewhere.
+_HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="${1:-${AGENT_ELN_WIKI_ROOT:-$(cd "$_HERE/../.." && pwd)}}"
 OUT_DIR="$ROOT/outputs/obsidian-sync"
 EVENT_LOG="$OUT_DIR/events.jsonl"
 SUMMARY_LOG="$OUT_DIR/events.md"
