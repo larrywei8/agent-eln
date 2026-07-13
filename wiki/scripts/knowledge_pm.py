@@ -14,10 +14,17 @@ from pathlib import Path
 from textwrap import shorten
 
 
-ROOT = Path("/home/workspace/knowledge")
-LINT = Path("/home/workspace/Skills/llm-wiki-anygen/scripts/lint_wiki.py")
+# Default to the wiki module inside agent-eln (this script lives at wiki/scripts/).
+# Override with --root when running against a different wiki repo.
+ROOT = Path(__file__).resolve().parent.parent
+# Override with $LLM_WIKI_ANYGEN_LINT if the llm-wiki-anygen skill lives elsewhere.
+import os as _os
+LINT = Path(_os.environ.get(
+    "LLM_WIKI_ANYGEN_LINT",
+    str(Path.home() / "Skills/llm-wiki-anygen/scripts/lint_wiki.py"),
+))
 INBOX_BUCKETS = {
-    "authored": ("Larry-authored material", "known known"),
+    "authored": ("author-produced material", "known known"),
     "unread-papers": ("unread papers for AI reading", "known unknown"),
     "web-saves": ("saved web articles and social captures", "known unknown"),
     "books-highlights": ("book highlights and reading screenshots", "known known / unknown known"),
@@ -478,7 +485,7 @@ def write_ingest_plan(root, inbox_items, stamp):
 
     lines.extend(["", "## Reusable Vicky Prompt", ""])
     lines.append("```text")
-    lines.append("Ingest the queued source from raw/inbox into Larry's Wiki using llm-wiki-anygen conventions. Read AGENTS.md and wiki/index.md first. Preserve the raw source, create or update a wiki/summaries page, update relevant concept/entity pages, update wiki/index.md, append log/YYYYMMDD.md, and run lint. Use standard wiki/ links and confidence metadata.")
+    lines.append("Ingest the queued source from raw/inbox into the wiki using llm-wiki-anygen conventions. Read AGENTS.md and wiki/index.md first. Preserve the raw source, create or update a wiki/summaries page, update relevant concept/entity pages, update wiki/index.md, append log/YYYYMMDD.md, and run lint. Use standard wiki/ links and confidence metadata.")
     lines.append("```")
 
     path = root / f"outputs/ingest-plans/{stamp}.md"
@@ -1090,7 +1097,7 @@ def _find_similar_entities(entities):
     """Group entities whose normalized title or any alias collides.
 
     Policy: only highly-similar pairs are real merge candidates.
-    Thin/low-inlink alone is NOT grounds for merging — Larry wants the full entity roster preserved.
+    Thin/low-inlink alone is NOT grounds for merging — the full entity roster is preserved by design.
     """
     buckets = {}
     for p in entities:
@@ -1518,7 +1525,7 @@ def run_supersession_check(root):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate weekly PM / agent reports for Larry's Wiki, or query it.")
+    parser = argparse.ArgumentParser(description="Generate weekly PM / agent reports for the wiki, or query it.")
     parser.add_argument("--root", default=str(ROOT))
     parser.add_argument("--mode", choices=["pm", "agent", "health", "search", "query", "ask", "audit-entities", "preprint-status", "quality", "supersession-check"], default="agent",
                        help="pm = full health reports + lint; agent = add ingest plan, hidden-patterns, literature seeds; "

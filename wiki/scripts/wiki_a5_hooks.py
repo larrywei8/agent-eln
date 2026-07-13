@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A5 write-safe event hooks for Larry's Wiki.
+"""A5 write-safe event hooks for the wiki.
 
 These helpers stage, flag, and report only. They never write wiki pages.
 """
@@ -242,7 +242,7 @@ def run_nightly(root, limit):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="A5 write-safe hooks for Larry's Wiki.")
+    parser = argparse.ArgumentParser(description="A5 write-safe hooks for the wiki.")
     parser.add_argument("--root", default=str(ROOT))
     sub = parser.add_subparsers(dest="command", required=True)
 

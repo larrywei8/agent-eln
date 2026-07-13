@@ -205,7 +205,7 @@ def export_citations(root: Path, qmd: Path) -> Path:
             f"@misc{{{key},",
             f"  title = {{{safe_title}}},",
             f"  howpublished = {{{rel}}},",
-            f"  note = {{Larry's Wiki snapshot exported {today()}; source hash {sha256_12(page_path)}}},",
+            f"  note = {{the wiki snapshot exported {today()}; source hash {sha256_12(page_path)}}},",
             "}",
             "",
         ]))
