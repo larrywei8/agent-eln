@@ -1,0 +1,35 @@
+# local config
+config.toml
+.env
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+*.egg-info/
+
+# indexes are regenerated from source of truth
+eln/index/*.csv
+eln/index/*.json
+eln/index/*.duckdb
+eln/index/*.html
+eln/index/.cache/
+eln/reports/
+
+# raw / large-file directories — track structure, not contents
+eln/raw/**
+!eln/raw/README.md
+!eln/raw/.gitkeep
+wiki/raw/**
+!wiki/raw/README.md
+!wiki/raw/.gitkeep
+
+# editor / OS junk
+.DS_Store
+.idea/
+.vscode/
+*.swp

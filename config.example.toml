@@ -1,0 +1,22 @@
+# lab-os configuration — copy to config.toml and edit, or export as env vars.
+# All keys are optional; the tools run with zero config.
+#
+# Env-var equivalent is shown in the comment above each key.
+
+# LABOS_USER — default author for `--by` flags on new records.
+user = "me"
+
+# LABOS_CONTACT_EMAIL — polite contact string for external APIs (Crossref, etc.).
+# Providing a real email gets you into their higher-rate polite pool.
+contact_email = "labos-agent@example.org"
+
+# LABOS_WIKI_URL_PREFIX — URL prefix used when emitting links into your wiki
+# (e.g. from the ELN's literature records to their wiki summaries).
+# Leave empty to emit plain repo-relative paths, which work fine locally.
+# Example: "https://your-host.example.com/?f="
+wiki_url_prefix = ""
+
+# LABOS_ELN_DIR / LABOS_WIKI_DIR — directory names inside the repo.
+# Change only if you renamed the top-level folders.
+eln_dir = "eln"
+wiki_dir = "wiki"

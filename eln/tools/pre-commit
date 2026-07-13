@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# ELN pre-commit hook: auto-rebuild the index and validate before every commit;
+# a failing validate blocks the commit.
+# Installed to .git/hooks/pre-commit by tools/install-hooks.sh.
+set -e
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+echo "[pre-commit] rebuilding index …"
+python3 tools/index.py >/dev/null
+echo "[pre-commit] validating …"
+if ! python3 tools/validate.py; then
+  echo "❌ Validation failed; commit aborted. Fix the errors above and try again." >&2
+  exit 1
+fi
+# Include the freshly rebuilt index in this commit
+git add index/ 2>/dev/null || true
+echo "[pre-commit] ✅ passed"
