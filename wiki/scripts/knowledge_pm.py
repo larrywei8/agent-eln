@@ -172,7 +172,7 @@ def load_graph_stats(root):
 
 def collect_questions(root):
     questions = []
-    for path in [root / "ANYGEN.md", root / "wiki/index.md"]:
+    for path in [root / "AGENTS.md", root / "wiki/index.md"]:
         if not path.exists():
             continue
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
@@ -192,7 +192,7 @@ def collect_questions(root):
 
 
 def collect_research_gaps(root):
-    path = root / "ANYGEN.md"
+    path = root / "AGENTS.md"
     if not path.exists():
         return []
     text = path.read_text(encoding="utf-8", errors="replace")
@@ -449,7 +449,7 @@ def write_ingest_plan(root, inbox_items, stamp):
     else:
         lines.append("- No inbox files are waiting for ingest.")
     if done_not_archived:
-        lines.append(f"- {len(done_not_archived)} file(s) marked `ingested` still sitting in inbox — archive them into `raw/<format>/` per ANYGEN.md.")
+        lines.append(f"- {len(done_not_archived)} file(s) marked `ingested` still sitting in inbox — archive them into `raw/<format>/` per AGENTS.md.")
 
     if failed:
         lines.extend(["", "## Failed / blocked (needs a human decision)", "",
@@ -478,7 +478,7 @@ def write_ingest_plan(root, inbox_items, stamp):
 
     lines.extend(["", "## Reusable Vicky Prompt", ""])
     lines.append("```text")
-    lines.append("Ingest the queued source from raw/inbox into Larry's Wiki using llm-wiki-anygen conventions. Read ANYGEN.md and wiki/index.md first. Preserve the raw source, create or update a wiki/summaries page, update relevant concept/entity pages, update wiki/index.md, append log/YYYYMMDD.md, and run lint. Use standard wiki/ links and confidence metadata.")
+    lines.append("Ingest the queued source from raw/inbox into Larry's Wiki using llm-wiki-anygen conventions. Read AGENTS.md and wiki/index.md first. Preserve the raw source, create or update a wiki/summaries page, update relevant concept/entity pages, update wiki/index.md, append log/YYYYMMDD.md, and run lint. Use standard wiki/ links and confidence metadata.")
     lines.append("```")
 
     path = root / f"outputs/ingest-plans/{stamp}.md"
@@ -1285,7 +1285,7 @@ def run_health(root):
         fails.append(("Empty pages", empty))
 
     # 2. Frontmatter: must start at byte 0 with '---' and have a closing fence.
-    #    Indented or missing-close frontmatter is the exact failure ANYGEN warns about.
+    #    Indented or missing-close frontmatter is the exact failure AGENTS.md warns about.
     broken_fm = []
     missing_keys = []
     no_fm = []
@@ -1447,7 +1447,7 @@ def run_quality(root, pages):
 def run_supersession_check(root):
     """A1: validate explicit supersession metadata (non-blocking, read-only).
 
-    Convention (see ANYGEN.md 'Supersession'):
+    Convention (see AGENTS.md 'Supersession'):
       - superseded page: `status: superseded`, `superseded_by: <wiki/path>`, and a
         top-of-body banner line matching '> ⚠ ... Superseded by ...'.
       - superseding page: `supersedes: [<wiki/path>, ...]` (reciprocal).

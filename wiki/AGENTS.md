@@ -84,7 +84,7 @@ PM outputs are working reports until promoted:
 - `outputs/ingest-plans/` → execute via the normal `ingest` operation, then log and lint.
 - `outputs/hidden-patterns/` → promote only stable, source-backed patterns into `wiki/concepts/`; otherwise leave as reflection prompts.
 - `outputs/literature-seeds/` → use as search prompts; do not treat them as citations until real sources are fetched and ingested.
-- `outputs/evolution/` → use for trend monitoring; promote durable methodology changes to `ANYGEN.md`, `Memory/scenarios/`, or a Skill.
+- `outputs/evolution/` → use for trend monitoring; promote durable methodology changes to `AGENTS.md`, `Memory/scenarios/`, or a Skill.
 - `outputs/typed-edges/` → machine-readable export only; do not hand-edit.
 
 #### Output retention
@@ -159,7 +159,7 @@ Every wiki page must carry two YAML frontmatter fields:
 - −1: Conflicts with other high-confidence sources
 - −2: Known retractions or controversies
 
-**Wiki meta-pages** (convention pages, index, ANYGEN, confidence scoring) default to confidence 10 — trusted by definition.
+**Wiki meta-pages** (convention pages, index, AGENTS, confidence scoring) default to confidence 10 — trusted by definition.
 
 ### Graph protocol
 

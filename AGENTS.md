@@ -7,7 +7,7 @@ You are working in the agent-eln monorepo. This file tells you where to go next.
 | **ELN** — activities (*what happened*) | `eln/` | experiments, meetings, ideas, projects, literature, reports | **Read `AGENT.md` first**, then `eln/AGENTS.md` |
 | **LIMS** — inventory (*what you have*) | `lims/` | plasmids, oligos, dna, samples, mice, cell-lines, reagents, antibodies, chemicals, recipes, kits, strains, viruses, instruments, datasets, persons | `lims/AGENTS.md` |
 | **Methods** — how-to (*how you do it*) | `methods/` | protocols (SOPs), pipelines, scripts, skills | `methods/AGENTS.md` |
-| **Wiki** — knowledge (*what others learned*) | `wiki/` | concepts, entities, paper summaries | `wiki/ANYGEN.md` |
+| **Wiki** — knowledge (*what others learned*) | `wiki/` | concepts, entities, paper summaries | `wiki/AGENTS.md` |
 | **tools/**, **templates/**, **index/** | root | shared toolkit, record templates, generated indexes | `AGENT.md` |
 
 ## Cross-system rules

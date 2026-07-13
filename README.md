@@ -69,7 +69,7 @@ zero configuration — sensible defaults let you clone and go.
 | ELN | `AGENT.md`, `eln/AGENTS.md` | 6 activity record types, DOI-deduped literature, provenance graph, HTML dashboard |
 | LIMS | `lims/AGENTS.md` | 16 inventory record types with expiry / status / location tracking |
 | Methods | `methods/AGENTS.md` | 4 how-to record types: protocol (SOP), pipeline, script, skill |
-| Wiki | `wiki/ANYGEN.md` | Vicky-style summaries, concepts, entities, bidirectional links to literature |
+| Wiki | `wiki/AGENTS.md` | Vicky-style summaries, concepts, entities, bidirectional links to literature |
 
 ## Contributing
 
