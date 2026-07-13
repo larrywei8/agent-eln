@@ -12,6 +12,7 @@ Environment variables (all optional):
   AGENT_ELN_REPO_ROOT         -- absolute path to repo root          (default: auto-detected from this file)
   AGENT_ELN_ELN_DIR           -- eln (activities) directory name     (default: "eln")
   AGENT_ELN_LIMS_DIR          -- lims (inventory) directory name     (default: "lims")
+  AGENT_ELN_METHODS_DIR       -- methods (how-to) directory name     (default: "methods")
   AGENT_ELN_WIKI_DIR          -- wiki directory name                 (default: "wiki")
 """
 import os
@@ -20,13 +21,15 @@ import os
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_REPO_ROOT = os.path.dirname(_HERE)
 
-REPO_ROOT = os.environ.get("AGENT_ELN_REPO_ROOT", _DEFAULT_REPO_ROOT)
-ELN_DIR   = os.environ.get("AGENT_ELN_ELN_DIR",  "eln")
-LIMS_DIR  = os.environ.get("AGENT_ELN_LIMS_DIR", "lims")
-WIKI_DIR  = os.environ.get("AGENT_ELN_WIKI_DIR", "wiki")
-ELN_ROOT  = os.path.join(REPO_ROOT, ELN_DIR)
-LIMS_ROOT = os.path.join(REPO_ROOT, LIMS_DIR)
-WIKI_ROOT = os.path.join(REPO_ROOT, WIKI_DIR)
+REPO_ROOT   = os.environ.get("AGENT_ELN_REPO_ROOT", _DEFAULT_REPO_ROOT)
+ELN_DIR     = os.environ.get("AGENT_ELN_ELN_DIR",     "eln")
+LIMS_DIR    = os.environ.get("AGENT_ELN_LIMS_DIR",    "lims")
+METHODS_DIR = os.environ.get("AGENT_ELN_METHODS_DIR", "methods")
+WIKI_DIR    = os.environ.get("AGENT_ELN_WIKI_DIR",    "wiki")
+ELN_ROOT     = os.path.join(REPO_ROOT, ELN_DIR)
+LIMS_ROOT    = os.path.join(REPO_ROOT, LIMS_DIR)
+METHODS_ROOT = os.path.join(REPO_ROOT, METHODS_DIR)
+WIKI_ROOT    = os.path.join(REPO_ROOT, WIKI_DIR)
 
 USER          = os.environ.get("AGENT_ELN_USER") or os.environ.get("USER") or "me"
 CONTACT_EMAIL = os.environ.get("AGENT_ELN_CONTACT_EMAIL", "agent-eln@example.org")

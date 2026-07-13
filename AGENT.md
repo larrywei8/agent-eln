@@ -1,18 +1,19 @@
 # AGENT.md — operating manual (any AI agent entering here: read this file first)
 
-You are now inside **agent-eln**: an AI-native Electronic Lab Notebook + LIMS + wiki. It is a
-folder of pure Markdown + images + scripts — no database engine, no server. You can
-operate the whole thing with read/write file ops, grep, and the scripts under `tools/`.
+You are now inside **agent-eln**: an AI-native Electronic Lab Notebook + LIMS + Methods +
+Wiki. It is a folder of pure Markdown + images + scripts — no database engine, no server.
+You can operate the whole thing with read/write file ops, grep, and the scripts under `tools/`.
 
-The repo is split into three top-level modules that share one registry, one provenance
+The repo is split into four top-level modules that share one registry, one provenance
 graph, one CLI:
-- `eln/` — **activities**: what happens (experiments, meetings, ideas, projects,
-  protocols, pipelines, scripts, skills, literature, reports).
-- `lims/` — **inventory**: what you have (plasmids, oligos, dna, samples, mice, cell-lines,
+- `eln/` — **activities** (*what happened*): experiments, meetings, ideas, projects,
+  literature, reports.
+- `lims/` — **inventory** (*what you have*): plasmids, oligos, dna, samples, mice, cell-lines,
   reagents, antibodies, chemicals, recipes, kits, strains, viruses, instruments, datasets,
-  persons).
-- `wiki/` — **knowledge**: concepts, entities, paper summaries. Cross-linked from
-  ELN literature via `wiki_link` / `sources`.
+  persons.
+- `methods/` — **how-to** (*how you do things*): protocols (SOPs), pipelines, scripts, skills.
+- `wiki/` — **knowledge** (*what others learned*): concepts, entities, paper summaries.
+  Cross-linked from ELN literature via `wiki_link` / `sources`.
 
 > Companion specs: `conventions.md` (IDs and naming), `hierarchy.md` (tiered compound-ID
 > model), `vocab.md` (controlled vocabulary for `sample_type` / `source_tissue` /
@@ -55,10 +56,6 @@ Shared at the repo root:
 - `eln/projects/`    project layer (PRJ): group cross-day experiments/ideas/data/literature into a research line
 - `eln/ideas/`       sparks of ideas
 - `eln/meetings/`    meeting notes + PPT transcripts
-- `eln/protocols/`   wet-lab SOPs
-- `eln/pipelines/`   dry-lab analysis pipelines
-- `eln/scripts/`     reusable code
-- `eln/skills/`      AI skills (prompt + code)
 - `eln/literature/`  literature library + reading notes (linked to wiki/summaries)
 - `eln/reports/`     generated markdown reports (weekly briefs, health snapshots)
 
@@ -67,6 +64,12 @@ Shared at the repo root:
 - `lims/samples/  lims/mice/  lims/cell-lines/  lims/viruses/`
 - `lims/chemicals/  lims/recipes/  lims/strains/  lims/kits/`
 - `lims/instruments/  lims/datasets/  lims/persons/`
+
+**`methods/`** — how you do things, authored + versioned + reused:
+- `methods/protocols/`  wet-lab SOPs
+- `methods/pipelines/`  dry-lab analysis pipelines
+- `methods/scripts/`    reusable code
+- `methods/skills/`     AI skills (prompt + code)
 
 **`wiki/`** — Vicky-style summaries, concepts, entities, external raw sources.
 

@@ -14,7 +14,7 @@ experiments: []            # all EXP-IDs for the day
 ### [EXP-...](../EXP-....md) — Title
 - Operator:
 - Resources used: [PLA-0042](../../../../lims/plasmids/PLA-0042/card.md), ...
-- Protocol/Pipeline: [SOP-0012](../../../protocols/...)
+- Protocol/Pipeline: [SOP-0012](../../../../methods/protocols/...)
 - Outputs: [SMP-...](...)
 - Conclusions:
 

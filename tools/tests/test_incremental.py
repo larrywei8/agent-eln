@@ -38,9 +38,10 @@ def _sandbox():
                             ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     # empty seed directories
     for sub in ("experiments", "meetings", "ideas", "projects",
-                "protocols", "pipelines", "scripts", "skills",
                 "literature", "reports"):
         os.makedirs(os.path.join(tmp, "eln", sub), exist_ok=True)
+    for sub in ("protocols", "pipelines", "scripts", "skills"):
+        os.makedirs(os.path.join(tmp, "methods", sub), exist_ok=True)
     for sub in ("plasmids", "oligos", "dna", "samples", "mice", "cell-lines",
                 "reagents", "antibodies", "chemicals", "recipes", "strains",
                 "kits", "viruses", "instruments", "datasets", "persons"):

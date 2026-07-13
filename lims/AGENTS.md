@@ -4,8 +4,11 @@ This directory holds **things you have**: reusable resources you can bench-touch
 freeze, deplete, expire, or point at. Each resource is a folder (`{ID}-{slug}/`) with
 `card.md` + attachments (map files, sequence FASTAs, images, manifests, ...).
 
-If a record represents an **event** (an experiment you ran, a meeting you had, a paper
-you read), it belongs under `../eln/`, not here.
+Where the other modules sit:
+
+- **`../eln/`** — *events* (an experiment you ran, a meeting you had, a paper you read).
+- **`../methods/`** — *how-to* (protocols, pipelines, scripts, skills you author and reuse).
+- **`../wiki/`** — external knowledge (paper summaries, concepts, entities).
 
 Operating manual: **`../AGENT.md`** at the repo root.
 Schema authority: **`../tools/registry.py`**.

@@ -1,11 +1,15 @@
 # eln/ — activities
 
 This directory holds **things that happen**: experiments, meetings, ideas, projects,
-protocols, pipelines, scripts, skills, literature, and generated reports.
+literature (your reading queue), and generated reports.
 
-If a record represents a **material or resource** you can bench-touch or point at
-(plasmid, oligo, sample, mouse, cell line, reagent, instrument, dataset, ...), it belongs
-under `../lims/`, not here.
+Where the other modules sit:
+
+- **`../lims/`** — the *materials* used by activities (plasmid, oligo, sample, mouse,
+  cell line, reagent, instrument, dataset, ...).
+- **`../methods/`** — the *how-to* referenced by activities (protocol / SOP, pipeline,
+  script, skill).
+- **`../wiki/`** — external knowledge (paper summaries, concepts, entities).
 
 Operating manual: **`../AGENT.md`** at the repo root.
 Schema authority: **`../tools/registry.py`**.
@@ -18,9 +22,5 @@ Schema authority: **`../tools/registry.py`**.
 | `meetings/` | MTG-XXXX | meeting notes, PPT transcripts |
 | `ideas/` | IDEA-XXXX | sparks of ideas |
 | `projects/` | PRJ-XXXX | project cards + subfolders |
-| `protocols/` | SOP-XXXX | wet-lab standard operating procedures |
-| `pipelines/` | PIPE-XXXX | dry-lab analysis pipelines |
-| `scripts/` | SCR-XXXX | reusable scripts (registered as records) |
-| `skills/` | SKL-XXXX | AI skills — prompt + code bundles |
 | `literature/` | LIT-XXXX | reading queue, wiki-linked |
 | `reports/` | (no ID) | generated markdown reports (weekly briefs, health snapshots) |

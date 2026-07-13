@@ -42,7 +42,7 @@ def is_excluded(dp: str) -> bool:
     return any(s in dp for s in EXCLUDE_DIRS)
 
 # —— Schema version — bump when TYPES/prefixes change. Used by docs & tests to detect drift. ——
-SCHEMA_VERSION = "5.0"  # Phase 5: eln/lims folder split (activities under eln/, inventory under lims/)
+SCHEMA_VERSION = "6.0"  # Phase 6: eln/lims/methods split (activities under eln/, inventory under lims/, how-to under methods/)
 
 # —— Literature relation vocabulary (Phase 6) — how a paper connects to your research. ——
 LIT_RELATIONS = {
@@ -70,8 +70,9 @@ BACKLINK_RULES = [
     ("produced_datasets",  "produced_in"),
 ]
 
-_R = "lims"   # inventory root: physical + biological + digital resources
-_E = "eln"    # activity root: experiments, notes, ideas, projects, protocols, ...
+_R = "lims"     # inventory root: physical + biological + digital resources
+_E = "eln"      # activity root: experiments, meetings, ideas, projects, literature, ...
+_M = "methods"  # how-to root: protocols, pipelines, scripts, skills
 TYPES = {
  # ---------------- LIMS resource types (container=dir, under lims/) ----------------
  "plasmid":   {"prefix":"PLA","id_style":"seq4","folder":f"{_R}/plasmids","container":"dir",
@@ -157,23 +158,23 @@ TYPES = {
                "who_field":"created_by","status_field":"status","allowed_status":["active","alumni","external"],
                "table":"persons","table_cols":["role","email","orcid","affiliation","tags"]},
 
- # ---------------- Process / knowledge types (container=file) ----------------
- "protocol":  {"prefix":"SOP","id_style":"seq4","folder":f"{_E}/protocols","container":"file",
+ # ---------------- Methods (how-to) types (container=file, under methods/) ----------------
+ "protocol":  {"prefix":"SOP","id_style":"seq4","folder":f"{_M}/protocols","container":"file",
                "template":"protocol","label":"SOP (protocol)","is_resource":False,
                "required":["id","type","name","created","created_by"],
                "who_field":"created_by","status_field":None,"allowed_status":[],
                "table":"protocols","table_cols":["version","category","est_time","tags"]},
- "pipeline":  {"prefix":"PIPE","id_style":"seq4","folder":f"{_E}/pipelines","container":"file",
+ "pipeline":  {"prefix":"PIPE","id_style":"seq4","folder":f"{_M}/pipelines","container":"file",
                "template":"pipeline","label":"pipeline (analysis workflow)","is_resource":False,
                "required":["id","type","name","created","created_by"],
                "who_field":"created_by","status_field":None,"allowed_status":[],
                "table":"pipelines","table_cols":["version","language","env","entrypoint","tags"]},
- "script":    {"prefix":"SCR","id_style":"seq4","folder":f"{_E}/scripts","container":"file",
+ "script":    {"prefix":"SCR","id_style":"seq4","folder":f"{_M}/scripts","container":"file",
                "template":"script","label":"script","is_resource":False,
                "required":["id","type","name","created","created_by"],
                "who_field":"created_by","status_field":None,"allowed_status":[],
                "table":"scripts","table_cols":["language","entrypoint","purpose","tags"]},
- "skill":     {"prefix":"SKL","id_style":"seq4","folder":f"{_E}/skills","container":"file",
+ "skill":     {"prefix":"SKL","id_style":"seq4","folder":f"{_M}/skills","container":"file",
                "template":"skill","label":"AI skill","is_resource":False,
                "required":["id","type","name","created","created_by"],
                "who_field":"created_by","status_field":None,"allowed_status":[],

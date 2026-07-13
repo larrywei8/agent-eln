@@ -1,26 +1,32 @@
 # agent-eln
 
 An **AI-native lab operating system**: an Electronic Lab Notebook (ELN), a Laboratory
-Information Management System (LIMS), and a knowledge wiki — all stored as plain
-Markdown + a small Python toolkit.
+Information Management System (LIMS), a methods library, and a knowledge wiki — all
+stored as plain Markdown + a small Python toolkit.
 
 Any AI agent that clones this repo can operate it. There is no database engine, no server —
 just files, `git`, and a handful of scripts.
 
 ```
 agent-eln/
-├── eln/     activities — experiments, meetings, ideas, projects, protocols, literature, ...
-├── lims/    inventory — plasmids, oligos, samples, mice, cell lines, reagents, instruments, ...
-├── wiki/    knowledge — concepts, entities, paper summaries
-├── tools/   shared toolkit (one CLI, one registry, one provenance graph)
-└── templates/  record templates
+├── eln/       activities — experiments, meetings, ideas, projects, literature, reports
+├── lims/      inventory  — plasmids, oligos, samples, mice, cell lines, reagents, instruments, ...
+├── methods/   how-to     — protocols (SOPs), pipelines, scripts, skills
+├── wiki/      knowledge  — concepts, entities, paper summaries
+├── tools/     shared toolkit (one CLI, one registry, one provenance graph)
+└── templates/ record templates
 ```
 
-**Mental model.** ELN records *things that happen*: an experiment you ran, a meeting you had,
-an idea you had. LIMS records *things you have*: the plasmid on the bench, the mouse in the
-cage, the reagent in the freezer. The provenance graph connects them — every experiment can
-declare `used_resources` / `produced_resources`, and the LIMS records get an auto-backfilled
-`produced_in` link.
+**Mental model.** Four modules, four distinct nouns:
+
+- **ELN** logs *what happened* — the experiment you ran, the meeting you had, the paper you read.
+- **LIMS** lists *what you have* — the plasmid on the bench, the mouse in the cage, the reagent in the freezer.
+- **methods** describes *how you do things* — the SOPs, analysis pipelines, and scripts you author and reuse.
+- **wiki** captures *what you learned from others* — summaries of external papers, concepts, and entities.
+
+The provenance graph connects them — every experiment can declare `used_resources` /
+`produced_resources` / `protocols` / `pipeline`, and the referenced LIMS/methods records
+get an auto-backfilled `produced_in` link.
 
 ## Quick start
 
@@ -54,14 +60,15 @@ zero configuration — sensible defaults let you clone and go.
 | `AGENT_ELN_CONTACT_EMAIL` | Polite contact for Crossref / external APIs | `agent-eln@example.org` |
 | `AGENT_ELN_WIKI_URL_PREFIX` | URL prefix for links into your wiki | *(empty — plain paths)* |
 | `AGENT_ELN_REPO_ROOT` | Override auto-detected repo root | *(auto)* |
-| `AGENT_ELN_ELN_DIR` / `AGENT_ELN_LIMS_DIR` / `AGENT_ELN_WIKI_DIR` | Rename the three module dirs | `eln` / `lims` / `wiki` |
+| `AGENT_ELN_ELN_DIR` / `AGENT_ELN_LIMS_DIR` / `AGENT_ELN_METHODS_DIR` / `AGENT_ELN_WIKI_DIR` | Rename the four module dirs | `eln` / `lims` / `methods` / `wiki` |
 
 ## What's included
 
 | Subsystem | Docs | Highlights |
 | --- | --- | --- |
-| ELN | `AGENT.md`, `eln/AGENTS.md` | 10 activity record types, DOI-deduped literature, provenance graph, HTML dashboard |
+| ELN | `AGENT.md`, `eln/AGENTS.md` | 6 activity record types, DOI-deduped literature, provenance graph, HTML dashboard |
 | LIMS | `lims/AGENTS.md` | 16 inventory record types with expiry / status / location tracking |
+| Methods | `methods/AGENTS.md` | 4 how-to record types: protocol (SOP), pipeline, script, skill |
 | Wiki | `wiki/ANYGEN.md` | Vicky-style summaries, concepts, entities, bidirectional links to literature |
 
 ## Contributing
