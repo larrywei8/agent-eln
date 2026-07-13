@@ -421,7 +421,7 @@ def write_hidden_patterns(root, pages, stamp):
     lines.extend(["", "## Suggested Human Reflection Prompts", ""])
     lines.append("- Which recurring theme is actually central to current work, and which is just recent-input bias?")
     lines.append("- Which high-frequency theme should become a project, Skill, or deeper literature track?")
-    lines.append("- Which bridge pattern is surprising enough to ask Vicky a follow-up query about?")
+    lines.append("- Which bridge pattern is surprising enough to ask the wiki agent a follow-up query about?")
 
     path = root / f"outputs/hidden-patterns/{stamp}.md"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -432,7 +432,7 @@ def write_ingest_plan(root, inbox_items, stamp):
     lines = [
         f"# Ingest Plan — {stamp}",
         "",
-        "This is the weekly source-intake plan for Vicky. It does not ingest by itself; it turns `raw/inbox/` into an ordered work queue with suggested wiki artifacts.",
+        "This is the weekly source-intake plan for the wiki agent. It does not ingest by itself; it turns `raw/inbox/` into an ordered work queue with suggested wiki artifacts.",
         "",
         "## Queue Summary",
         "",
@@ -479,11 +479,11 @@ def write_ingest_plan(root, inbox_items, stamp):
         lines.append(f"   - Title hint: {item['title_hint']}")
         lines.append(f"   - Suggested summary: `wiki/summaries/{summary_slug}.md`")
         lines.append(f"   - Headings: {shorten(headings, width=180, placeholder='...')}")
-        lines.append("   - Vicky action: read source, create/update summary, then link or create relevant concept/entity pages with confidence metadata.")
+        lines.append("   - wiki-agent action: read source, create/update summary, then link or create relevant concept/entity pages with confidence metadata.")
     if not ordered:
         lines.append("- No queued source files.")
 
-    lines.extend(["", "## Reusable Vicky Prompt", ""])
+    lines.extend(["", "## Reusable Ingest Prompt", ""])
     lines.append("```text")
     lines.append("Ingest the queued source from raw/inbox into the wiki using llm-wiki-anygen conventions. Read AGENTS.md and wiki/index.md first. Preserve the raw source, create or update a wiki/summaries page, update relevant concept/entity pages, update wiki/index.md, append log/YYYYMMDD.md, and run lint. Use standard wiki/ links and confidence metadata.")
     lines.append("```")
@@ -1438,7 +1438,7 @@ def run_quality(root, pages):
     rows.sort(key=lambda r: r[0])
     lines = [f"# Wiki Quality Report — {stamp}", "",
              f"Non-blocking. {len(rows)} page(s) flagged of {len(pages)}. "
-             "Feeds the human/Vicky `audit/` loop; pages are never auto-rewritten.", ""]
+             "Feeds the human/agent `audit/` loop; pages are never auto-rewritten.", ""]
     if rows:
         lines += ["| Page | Type | Flags |", "|---|---|---|"]
         lines += [f"| `{path}` | {typ} | {iss} |" for path, typ, iss in rows]
@@ -1511,7 +1511,7 @@ def run_supersession_check(root):
     lines = [f"# Supersession Check — {stamp}", "",
              f"Pages using supersession metadata: **{used}**. Reciprocity/banner violations: "
              f"**{len(violations)}**. Preprint-sourced review candidates: **{len(candidates)}**.",
-             "", "Non-blocking. Marking a page superseded is a human/Vicky decision — this only validates.", ""]
+             "", "Non-blocking. Marking a page superseded is a human/agent decision — this only validates.", ""]
     lines.append("## Violations")
     lines += ([f"- {v}" for v in violations] if violations else ["- none ✅"])
     lines += ["", "## Preprint-sourced pages to review for a published successor",

@@ -71,7 +71,7 @@ Shared at the repo root:
 - `methods/scripts/`    reusable code
 - `methods/skills/`     AI skills (prompt + code)
 
-**`wiki/`** — Vicky-style summaries, concepts, entities, external raw sources.
+**`wiki/`** — llm-wiki-style summaries, concepts, entities, external raw sources.
 
 ## 2. ID scheme (authoritative definition in tools/registry.py; full table in conventions.md)
 PLA (plasmid) OLI (oligo) DNA RGT (reagent) AB (antibody) SMP (sample) MUS (mouse) CL (cell line)
@@ -128,7 +128,7 @@ ID (`hierarchy.md` rules 1–5). Go deeper than two segments by continuing via
 - Human view: double-click `index/dashboard.html` — an interactive provenance graph + 4 tabs:
   - **Records**: searchable / type-filterable record table (click ID to jump)
   - **This week**: all records created ≤7 days ago, sorted by date descending
-  - **To read**: LIT with empty `wiki_link` (not yet ingested into Vicky wiki)
+  - **To read**: LIT with empty `wiki_link` (not yet ingested into the wiki)
   - **Expiring**: resources with `expiry`/`expiration` within 30 days
 - Find "who used PLA-0042": `grep -rl "PLA-0042" .` or read `index/records.csv`.
 - Tabular queries: read `index/<type>.csv` (e.g. plasmids.csv columns = backbone/resistance/insert)
@@ -161,7 +161,7 @@ ID (`hierarchy.md` rules 1–5). Go deeper than two segments by continuing via
 - **PDF → LIT card**: `python tools/lit_from_pdf.py path/to/paper.pdf`
   Uses `markitdown` to extract first-page text → regex-hunts for a DOI → delegates to
   `lit_from_doi.py`; if no DOI is found, prints the first 400 chars as a hint.
-- **↔ Vicky wiki bidirectional link**: the LIT card writes `wiki_link: knowledge/wiki/summaries/<slug>.md`;
+- **↔ wiki bidirectional link**: the LIT card writes `wiki_link: wiki/summaries/<slug>.md`;
   running `python tools/wiki_sync.py --fix` appends the LIT path to the corresponding
   summary's `sources:`. Use `--check` (default) to inspect without modifying.
 - **Clickable wiki link**: the LIT card body must contain one line

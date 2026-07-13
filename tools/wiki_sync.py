@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""wiki_sync.py — maintain bidirectional links between ELN LIT cards and Vicky wiki summaries.
+"""wiki_sync.py — maintain bidirectional links between ELN LIT cards and wiki summaries.
 
 Phase 3 (2026-07-11).
 
@@ -13,7 +13,7 @@ Contract (see docs/history/SPEC-phase3.md § B):
   * summary's sources: array contains the LIT card's repo-relative path
 
   What it does NOT do:
-    - Does not create wiki summaries (that's Vicky/llm-wiki-anygen's job)
+    - Does not create wiki summaries (that's the llm-wiki-anygen skill's job)
     - Does not touch concept pages
     - Does not use fuzzy matching for wiki_link; a dead link is a dead link
 """

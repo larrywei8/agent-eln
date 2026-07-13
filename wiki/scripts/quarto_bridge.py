@@ -281,7 +281,7 @@ def promote_finding(root: Path, qmd: Path, title: str | None) -> Path:
         f"- Source QMD: `{qmd}`",
         f"- Source digest: `{sha256_12(qmd)}`",
         f"- Citation export: `{(export_dir / 'manifest.json').relative_to(root).as_posix()}`",
-        "- Promotion rule: staged from Quarto into `raw/inbox/project-notes/`; Vicky must ingest before any wiki page is written.",
+        "- Promotion rule: staged from Quarto into `raw/inbox/project-notes/`; an agent must ingest before any wiki page is written.",
         "",
         "## Durable conclusion",
         "",
