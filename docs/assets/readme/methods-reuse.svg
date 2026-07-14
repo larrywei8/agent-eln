@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Turn one-off work into reusable versioned methods</title>
+  <desc id="desc">A notebook workflow, analysis commands, and a one-off script become a versioned SOP, pipeline, and script reused by several experiments.</desc>
+  <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#111" opacity=".12"/></pattern><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#111"/></marker><style>.s{font-family:Inter,Arial,sans-serif}.m{font-family:"JetBrains Mono",Menlo,monospace}.card{stroke:#111;stroke-width:3}.tag{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:22px;letter-spacing:2px}.id{font-family:"JetBrains Mono",Menlo,monospace;font-weight:800;font-size:19px}.small{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:18px;fill:#403d35}</style></defs>
+  <rect width="1600" height="900" fill="#f7f5ec"/><rect x="34" y="34" width="1532" height="832" fill="url(#dots)" stroke="#111" stroke-width="3"/>
+  <rect x="76" y="68" width="230" height="52" fill="#96f19b" class="card"/><text x="99" y="103" class="tag">METHODS</text>
+  <text x="76" y="190" class="s" font-size="68" font-weight="900">Author once. Reuse forever.</text><text x="77" y="238" class="s" font-size="24" font-weight="700" fill="#403d35">Turn successful work into citable methods with stable IDs and exact versions.</text>
+  <text x="76" y="306" class="tag">ONE-OFF WORK</text><text x="602" y="306" class="tag">VERSIONED METHODS</text><text x="1130" y="306" class="tag">REUSED WITH PROOF</text>
+  <path d="M482 548h100" stroke="#111" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(76 344)"><rect x="10" y="10" width="390" height="450" fill="#111"/><rect width="390" height="450" fill="#f7f5ec" class="card"/>
+    <g transform="rotate(-2 190 78)"><rect x="25" y="23" width="340" height="112" fill="#ff7dc1" class="card"/><text x="47" y="58" class="tag">NOTEBOOK</text><path d="M48 80h250M48 101h215M48 122h270" stroke="#111" stroke-width="4"/></g>
+    <rect x="25" y="164" width="340" height="112" fill="#111" class="card"/><text x="47" y="199" fill="#a8e0f0" class="id">$ align --trim reads/</text><text x="47" y="231" fill="#f7f5ec" class="id">$ quantify --ref v3</text><text x="47" y="259" fill="#96f19b" class="small">analysis commands</text>
+    <g transform="rotate(2 190 353)"><rect x="25" y="305" width="340" height="112" fill="#f7f5ec" class="card"/><text x="47" y="340" class="tag">SCRIPT.PY</text><text x="47" y="372" class="m" font-size="17">for sample in samples:</text><text x="47" y="400" class="m" font-size="17">    run(sample)</text></g>
+  </g>
+
+  <g transform="translate(608 344)"><rect x="10" y="10" width="410" height="450" fill="#111"/><rect width="410" height="450" fill="#f7f5ec" class="card"/>
+    <rect x="22" y="22" width="366" height="112" fill="#96f19b" class="card"/><text x="43" y="58" class="id">SOP-0012</text><rect x="286" y="40" width="80" height="35" fill="#111"/><text x="326" y="64" text-anchor="middle" fill="#f7f5ec" class="id" font-size="16">v1.0</text><text x="43" y="98" class="small">RNA extraction workflow</text>
+    <rect x="22" y="151" width="366" height="112" fill="#a8e0f0" class="card"/><text x="43" y="187" class="id">PIP-0008</text><rect x="286" y="169" width="80" height="35" fill="#111"/><text x="326" y="193" text-anchor="middle" fill="#f7f5ec" class="id" font-size="16">v2.1</text><text x="43" y="227" class="small">Sequencing analysis</text>
+    <rect x="22" y="280" width="366" height="112" fill="#f7f5ec" class="card"/><text x="43" y="316" class="id">SCR-0021</text><rect x="286" y="298" width="80" height="35" fill="#111"/><text x="326" y="322" text-anchor="middle" fill="#f7f5ec" class="id" font-size="16">v1.3</text><text x="43" y="356" class="small">Batch quantification script</text>
+    <text x="205" y="428" text-anchor="middle" class="s" font-size="17" font-weight="900" letter-spacing="2">STABLE ID · VERSION</text>
+  </g>
+
+  <path d="M1018 401C1082 401 1080 382 1130 382M1018 498C1080 498 1082 520 1130 520M1018 595C1082 595 1080 658 1130 658" stroke="#111" stroke-width="4" fill="none"/>
+  <path d="M1116 373l18 9-18 9ZM1116 511l18 9-18 9ZM1116 649l18 9-18 9Z" fill="#111"/>
+  <path d="M1018 401C1085 401 1080 658 1130 658M1018 498C1082 498 1080 382 1130 382" stroke="#111" stroke-width="3" stroke-dasharray="10 9" fill="none"/>
+  <g transform="translate(1138 344)"><rect x="10" y="10" width="378" height="450" fill="#111"/><rect width="378" height="450" fill="#f7f5ec" class="card"/>
+    <rect x="24" y="24" width="330" height="102" fill="#f7f5ec" class="card"/><text x="44" y="59" class="id">EXP-0041</text><text x="44" y="92" class="small">SOP-0012 · v1.0</text>
+    <rect x="24" y="154" width="330" height="102" fill="#96f19b" class="card"/><text x="44" y="189" class="id">EXP-0056</text><text x="44" y="222" class="small">SOP-0012 · v1.1</text>
+    <rect x="24" y="284" width="330" height="102" fill="#a8e0f0" class="card"/><text x="44" y="319" class="id">EXP-0064</text><text x="44" y="352" class="small">PIP-0008 · v2.1</text>
+    <rect x="64" y="410" width="250" height="43" fill="#111"/><text x="189" y="438" text-anchor="middle" fill="#f7f5ec" class="s" font-size="14" font-weight="900" letter-spacing="2">VERSION-LOCKED</text>
+  </g>
+</svg>

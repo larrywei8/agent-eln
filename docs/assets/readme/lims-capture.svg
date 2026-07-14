@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Register mixed laboratory inventory from photos or speech</title>
+  <desc id="desc">A kit label, a mouse cage information card, and a rack of forty tubes pass through agent extraction and human review into structured LIMS records with stable IDs and locations.</desc>
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#111" opacity=".12"/></pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#111"/></marker>
+    <style>.s{font-family:Inter,Arial,sans-serif}.m{font-family:"JetBrains Mono",Menlo,monospace}.card{stroke:#111;stroke-width:3}.tag{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:22px;letter-spacing:2px}.id{font-family:"JetBrains Mono",Menlo,monospace;font-weight:800;font-size:18px}.small{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:18px;fill:#403d35}</style>
+  </defs>
+  <rect width="1600" height="900" fill="#f7f5ec"/><rect x="34" y="34" width="1532" height="832" fill="url(#dots)" stroke="#111" stroke-width="3"/>
+  <rect x="76" y="68" width="190" height="52" fill="#a8f0a8" class="card"/><text x="99" y="103" class="tag">LIMS</text>
+  <text x="76" y="190" class="s" font-size="68" font-weight="900">Snap it. Say it. It’s registered.</text>
+  <text x="77" y="238" class="s" font-size="24" font-weight="700" fill="#403d35">Mixed inventory becomes stable, searchable records—with review before commit.</text>
+
+  <text x="76" y="306" class="tag">01 · CAPTURE</text><text x="626" y="306" class="s" font-size="20" font-weight="900" letter-spacing="2">02 · EXTRACT + REVIEW</text><text x="1142" y="306" class="tag">03 · LIMS</text>
+  <path d="M520 540H602" stroke="#111" stroke-width="5" marker-end="url(#arrow)"/><path d="M1013 540h86" stroke="#111" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(76 340)">
+    <rect x="10" y="10" width="440" height="466" fill="#111"/><rect width="440" height="466" rx="2" fill="#f7f5ec" class="card"/>
+    <rect x="24" y="24" width="392" height="112" fill="#a8f0a8" class="card"/><rect x="44" y="46" width="82" height="66" fill="#f7f5ec" class="card"/><path d="M57 97l19-20 13 12 17-24 8 32Z" fill="#111"/><circle cx="68" cy="65" r="8" fill="#111"/><text x="146" y="67" class="tag">KIT LABEL</text><text x="146" y="98" class="small">lot · expiry · vendor</text>
+    <rect x="24" y="154" width="392" height="116" fill="#ff7dc1" class="card"/><rect x="44" y="176" width="104" height="72" fill="#f7f5ec" class="card"/><path d="M57 192h78M57 206h78M57 220h48M57 234h65" stroke="#111" stroke-width="4"/><text x="168" y="198" class="tag">10 CAGES</text><text x="168" y="230" class="small">one information card</text>
+    <rect x="24" y="288" width="392" height="132" fill="#a8e0f0" class="card"/><g fill="#f7f5ec" stroke="#111" stroke-width="2">
+      <circle cx="55" cy="319" r="10"/><circle cx="82" cy="319" r="10"/><circle cx="109" cy="319" r="10"/><circle cx="136" cy="319" r="10"/><circle cx="163" cy="319" r="10"/><circle cx="190" cy="319" r="10"/><circle cx="217" cy="319" r="10"/><circle cx="244" cy="319" r="10"/>
+      <circle cx="55" cy="347" r="10"/><circle cx="82" cy="347" r="10"/><circle cx="109" cy="347" r="10"/><circle cx="136" cy="347" r="10"/><circle cx="163" cy="347" r="10"/><circle cx="190" cy="347" r="10"/><circle cx="217" cy="347" r="10"/><circle cx="244" cy="347" r="10"/>
+      <circle cx="55" cy="375" r="10"/><circle cx="82" cy="375" r="10"/><circle cx="109" cy="375" r="10"/><circle cx="136" cy="375" r="10"/><circle cx="163" cy="375" r="10"/><circle cx="190" cy="375" r="10"/><circle cx="217" cy="375" r="10"/><circle cx="244" cy="375" r="10"/>
+      <circle cx="55" cy="403" r="10"/><circle cx="82" cy="403" r="10"/><circle cx="109" cy="403" r="10"/><circle cx="136" cy="403" r="10"/><circle cx="163" cy="403" r="10"/><circle cx="190" cy="403" r="10"/><circle cx="217" cy="403" r="10"/><circle cx="244" cy="403" r="10"/>
+      <circle cx="271" cy="319" r="10"/><circle cx="298" cy="319" r="10"/><circle cx="325" cy="319" r="10"/><circle cx="352" cy="319" r="10"/><circle cx="271" cy="347" r="10"/><circle cx="298" cy="347" r="10"/><circle cx="325" cy="347" r="10"/><circle cx="352" cy="347" r="10"/>
+    </g><text x="277" y="388" class="tag">40</text><text x="277" y="414" class="small">TUBES</text>
+    <rect x="80" y="437" width="126" height="40" fill="#111"/><text x="95" y="464" fill="#f7f5ec" class="tag" font-size="17">PHOTO</text><rect x="222" y="437" width="142" height="40" fill="#111"/><text x="238" y="464" fill="#f7f5ec" class="tag" font-size="17">OR VOICE</text>
+  </g>
+
+  <g transform="translate(626 340)">
+    <rect x="10" y="10" width="370" height="466" fill="#111"/><rect width="370" height="466" fill="#f7f5ec" class="card"/>
+    <text x="28" y="50" class="tag">AGENT DRAFT</text><circle cx="330" cy="40" r="15" fill="#ff7dc1" class="card"/>
+    <g class="m" font-size="17" font-weight="700"><text x="28" y="96">✓ labels detected</text><text x="28" y="129">✓ IDs resolved</text><text x="28" y="162">✓ locations parsed</text><text x="28" y="195">✓ duplicates checked</text></g>
+    <rect x="24" y="224" width="322" height="154" fill="#fff" class="card"/><text x="44" y="258" class="id">REVIEW 53 RECORDS</text><path d="M45 292l14 14 26-34" stroke="#111" stroke-width="6" fill="none"/><text x="102" y="302" class="small">identity + location</text><path d="M45 337l14 14 26-34" stroke="#111" stroke-width="6" fill="none"/><text x="102" y="347" class="small">lot + expiry</text>
+    <rect x="54" y="406" width="262" height="54" fill="#a8f0a8" class="card"/><text x="185" y="442" text-anchor="middle" class="tag">CONFIRM</text>
+  </g>
+
+  <g transform="translate(1124 340)">
+    <rect x="10" y="10" width="390" height="466" fill="#111"/><rect width="390" height="466" fill="#f7f5ec" class="card"/>
+    <rect x="22" y="22" width="346" height="112" fill="#a8f0a8" class="card"/><text x="42" y="56" class="id">KIT-0041</text><text x="42" y="88" class="small">RNA extraction kit</text><text x="42" y="116" class="small">Cold room · Shelf B2</text>
+    <rect x="22" y="151" width="346" height="112" fill="#f7f5ec" class="card"/><text x="42" y="185" class="id">MOU-0211…0220</text><text x="42" y="217" class="small">Rack 3 · Cages A01–A10</text><text x="42" y="245" class="small">10 identities linked</text>
+    <rect x="22" y="280" width="346" height="112" fill="#a8e0f0" class="card"/><text x="42" y="314" class="id">SMP-0301…0340</text><text x="42" y="346" class="small">Freezer 2 · Box C7</text><text x="42" y="374" class="small">40 tube positions mapped</text>
+    <rect x="58" y="414" width="274" height="50" fill="#111"/><text x="195" y="447" text-anchor="middle" fill="#f7f5ec" class="tag">REGISTERED</text>
+  </g>
+</svg>

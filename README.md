@@ -85,6 +85,37 @@ agent-eln/
 └── templates/ structured record templates
 ```
 
+## Register inventory without data entry
+
+### Snap it. Say it. It’s registered.
+
+Photograph a kit label, mouse cage card, or rack of uniquely labeled tubes—or describe
+the item directly to your agent. The agent can extract the details, resolve or assign
+stable IDs, map locations, check for duplicates, and prepare the records for review
+before registration.
+
+![A kit label, mouse cage card, and tube rack becoming reviewed LIMS records with stable IDs and mapped locations](docs/assets/readme/lims-capture.svg)
+
+## Turn successful work into reusable methods
+
+### Author once. Reuse forever.
+
+Turn a successful notebook workflow, analysis command sequence, or one-off script into a
+versioned SOP, pipeline, or reusable script. Future experiments can cite the exact
+method ID and version that produced their results.
+
+![A notebook workflow, analysis commands, and script becoming versioned methods reused by multiple experiments](docs/assets/readme/methods-reuse.svg)
+
+## Build connected knowledge from any source
+
+### Ingest anything. Build your research brain.
+
+Bring in a paper, poster, GitHub repository, or website. Agent ELN can preserve the
+source, organize the concepts, methods, tools, and ideas it contains, and connect that
+knowledge to the experiments it informs.
+
+![PDF, poster, GitHub, and website sources becoming a traceable connected research knowledge graph](docs/assets/readme/wiki-ingest-graph.svg)
+
 ## What this changes for you
 
 ### Reconstruct old experiments
