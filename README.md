@@ -187,6 +187,17 @@ without creating a second source of truth:
 
 Run `python tools/dashboard.py`, then open `index/dashboard.html` locally.
 
+## Install with your AI agent
+
+Using Codex, Claude Code, OpenClaw, Hermes, Zo Computer, or another coding agent? Give
+it this one prompt:
+
+> Install Agent ELN from https://github.com/larrywei8/agent-eln into a new `agent-eln`
+> folder and follow its installation instructions.
+
+Your agent will clone, configure, validate, and test a clean Agent ELN workspace by
+following [`INSTALL.md`](INSTALL.md).
+
 ## Quick start
 
 ```bash
