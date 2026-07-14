@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">One result and its complete experimental story</title>
+  <desc id="desc">A provenance graph connects literature, cells, reagent, and protocol through an experiment to RNA, sequencing data, and a result.</desc>
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#111" opacity=".12"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#111"/></marker>
+    <style>
+      .sans{font-family:Inter,Arial,sans-serif}.mono{font-family:"JetBrains Mono",Menlo,monospace}.ink{fill:#111}.muted{fill:#4a473e}.card{stroke:#111;stroke-width:3}.line{stroke:#111;stroke-width:5;fill:none}.label{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:22px;letter-spacing:2px}.id{font-family:"JetBrains Mono",Menlo,monospace;font-weight:800;font-size:24px}.name{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:25px}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#f7f5ec"/><rect x="34" y="34" width="1532" height="832" fill="url(#dots)" stroke="#111" stroke-width="3"/>
+  <rect x="78" y="74" width="300" height="58" fill="#ff7dc1" stroke="#111" stroke-width="3"/><rect x="86" y="82" width="300" height="58" fill="#111"/><rect x="78" y="74" width="300" height="58" fill="#ff7dc1" stroke="#111" stroke-width="3"/>
+  <text x="104" y="112" class="label ink">THE COMPLETE STORY</text>
+  <text x="78" y="208" class="sans ink" font-size="66" font-weight="900">Everything that produced</text>
+  <rect x="78" y="230" width="546" height="92" fill="#a8f0a8" stroke="#111" stroke-width="3"/><rect x="89" y="241" width="546" height="92" fill="#111"/><rect x="78" y="230" width="546" height="92" fill="#a8f0a8" stroke="#111" stroke-width="3"/>
+  <text x="104" y="299" class="sans ink" font-size="66" font-weight="900">one result.</text>
+  <text x="80" y="365" class="sans muted" font-size="25" font-weight="500">Literature · materials · method · experiment · outputs</text>
+
+  <path class="line" d="M340 510H620"/><path class="line" d="M340 625H620"/><path class="line" d="M340 740H620"/><path class="line" d="M620 510V625"/><path class="line" d="M620 740V625"/>
+  <path class="line" d="M930 625H1110"/><path class="line" d="M1110 625V535"/><path class="line" d="M1110 625V715"/><path class="line" d="M1325 535V625"/><path class="line" d="M1325 715V625"/>
+
+  <g><rect x="86" y="462" width="254" height="96" fill="#a8e0f0" class="card"/><rect x="96" y="472" width="254" height="96" fill="#111"/><rect x="86" y="462" width="254" height="96" fill="#a8e0f0" class="card"/><text x="108" y="500" class="id">LIT-0047</text><text x="108" y="534" class="name">motivating paper</text></g>
+  <g><rect x="86" y="577" width="254" height="96" fill="#a8f0a8" class="card"/><rect x="96" y="587" width="254" height="96" fill="#111"/><rect x="86" y="577" width="254" height="96" fill="#a8f0a8" class="card"/><text x="108" y="615" class="id">SMP-2026-0024</text><text x="108" y="649" class="name">cultured cells</text></g>
+  <g><rect x="86" y="692" width="254" height="96" fill="#a8f0a8" class="card"/><rect x="96" y="702" width="254" height="96" fill="#111"/><rect x="86" y="692" width="254" height="96" fill="#a8f0a8" class="card"/><text x="108" y="730" class="id">RGT-0018</text><text x="108" y="764" class="name">treatment reagent</text></g>
+  <g><rect x="620" y="577" width="310" height="112" fill="#ff7dc1" class="card"/><rect x="632" y="589" width="310" height="112" fill="#111"/><rect x="620" y="577" width="310" height="112" fill="#ff7dc1" class="card"/><text x="646" y="620" class="id">EXP-2026-07-14-01</text><text x="646" y="660" class="name">treatment experiment</text></g>
+  <g><rect x="620" y="462" width="310" height="80" fill="#96f19b" class="card"/><text x="646" y="500" class="id">SOP-0007</text><text x="646" y="528" class="name" font-size="21">treatment protocol</text></g>
+  <g><rect x="1110" y="487" width="255" height="96" fill="#a8f0a8" class="card"/><text x="1132" y="525" class="id">SMP-2026-0031</text><text x="1132" y="559" class="name">extracted RNA</text></g>
+  <g><rect x="1110" y="667" width="255" height="96" fill="#a8e0f0" class="card"/><text x="1132" y="705" class="id">DAT-2026-0012</text><text x="1132" y="739" class="name">sequencing data</text></g>
+  <g><rect x="1280" y="585" width="222" height="98" fill="#111" stroke="#111" stroke-width="3"/><text x="1304" y="624" fill="#f7f5ec" class="id">RESULT</text><text x="1304" y="660" fill="#a8f0a8" class="name">traceable</text></g>
+  <text x="80" y="836" class="sans ink" font-size="31" font-weight="800">Start anywhere. Trace backward or forward. Nothing orphaned.</text>
+</svg>

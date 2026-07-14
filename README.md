@@ -14,6 +14,8 @@ protocols, datasets, code, and papers behind it—while an AI agent handles the 
 Six months later, you can still trace any result back to what you used, what you did,
 what you produced, and why.
 
+![One result connected to the literature, materials, method, experiment, samples, and data that produced it](docs/assets/readme/hero-provenance.svg)
+
 ## Your experiment is one story stored in ten different places
 
 The notebook records what you did. A spreadsheet tracks sample names. Plasmid maps,
@@ -25,6 +27,8 @@ may be memorable while the chain of evidence behind it gradually disappears.
 
 Traditional electronic notebooks digitize the page. Agent ELN preserves the connected
 story behind the result.
+
+![Disconnected research files compared with the same records connected by Agent ELN](docs/assets/readme/problem-connected.svg)
 
 ## From one sentence to a traceable experiment
 
@@ -41,6 +45,8 @@ Using Agent ELN's documented workflows and tools, the agent can:
 4. Link every input, method, and output.
 5. Check whether important context is missing or broken.
 6. Refresh the searchable index and provenance graph.
+
+![Animation showing a natural-language experiment becoming linked Agent ELN records](docs/assets/readme/agent-workflow.gif)
 
 You remain responsible for the science. The agent handles the repetitive organization
 that makes the science recoverable.
@@ -66,6 +72,8 @@ protocol, or paper and discover the experiments connected to it.
 
 All four use the same identifiers, links, validation tools, and provenance model. They
 are not separate databases that need to be kept in sync by hand.
+
+![ELN, LIMS, Methods, and Wiki connected through one provenance model](docs/assets/readme/four-modules.svg)
 
 ```text
 agent-eln/
