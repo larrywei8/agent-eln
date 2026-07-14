@@ -33,5 +33,7 @@ jobs:
       - name: Check wiki starter health
         run: python wiki/scripts/knowledge_pm.py --mode health --root .
 
-      - name: Check generated indexes
-        run: python tools/index.py --check
+      - name: Generate and check derived indexes
+        run: |
+          python tools/index.py --force
+          python tools/index.py --check
