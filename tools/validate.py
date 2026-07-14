@@ -19,23 +19,20 @@
 Errors (1-3, 6-structure) return a non-zero exit code and block commit;
 warnings only report, do not block.
 """
-import os, sys
+import os, sys, re, json, argparse
 sys.path.insert(0, os.path.dirname(__file__))
 from fm import parse
 import registry as R
 import hierarchy as H
 import vocab as V
+import records as record_api
 
 ROOT = R.ROOT
 ids, refs, records, errors, warnings = {}, [], {}, [], []
 dois = {}  # doi -> first record id/path — used to enforce LIT DOI uniqueness
 REF_FIELDS = R.FORWARD_REF_FIELDS
 
-for dp, _, fs in os.walk(ROOT):
-    if any(s in dp for s in (".git", "/index", "/templates", "/tools", "/wiki", "/raw", "/docs", "/references", "/inbox")): continue
-    for fn in fs:
-        if not fn.endswith(".md"): continue
-        p = os.path.join(dp, fn); meta, _ = parse(p); rel = os.path.relpath(p, ROOT)
+for p, rel, meta, _body in record_api.iter_records(ROOT):
         if "id" not in meta: continue
         rid = meta["id"]
         if any(x in rid for x in ("XXXX", "YYYY", "YYYY-MM-DD", "-NN")): continue  # template
@@ -64,10 +61,11 @@ for dp, _, fs in os.walk(ROOT):
                                   f"({rel} vs {dois[doi][1]})")
                 else:
                     dois[doi] = (rid, rel)
-            # Phase 6: relation vocabulary — warn only, don't block.
+            # Literature relations are optional-typed: known values enable grouped
+            # evidence views, while free-form values remain valid reading notes.
             rel_v = meta.get("relation")
-            if rel_v and rel_v not in R.LIT_RELATIONS:
-                warnings.append(f"{rid}: relation='{rel_v}' not in vocabulary {sorted(R.LIT_RELATIONS)}  ({rel})")
+            if isinstance(rel_v, list) and len(rel_v) != len(set(rel_v)):
+                warnings.append(f"{rid}: duplicate literature relation values  ({rel})")
 
         # Phase 5: reproducibility gate — completed experiments must record
         # what was actually run. Wetlab needs a protocol_version snapshot;
@@ -82,6 +80,8 @@ for dp, _, fs in os.walk(ROOT):
                     warnings.append(f"{rid}: complete drylab experiment missing code_commit  ({rel})")
                 if not (meta.get("env_lockfile") or "").strip():
                     warnings.append(f"{rid}: complete drylab experiment missing env_lockfile  ({rel})")
+                if not (meta.get("command") or "").strip():
+                    warnings.append(f"{rid}: complete drylab experiment missing command  ({rel})")
 
         # 7) Controlled-vocab checks (only warn if vocab.md defined the set).
         if V.SAMPLE_TYPES and meta.get("sample_type"):
@@ -99,13 +99,36 @@ for dp, _, fs in os.walk(ROOT):
 
         for field in REF_FIELDS:
             v = meta.get(field)
-            for tgt in ([v] if isinstance(v, str) else (v or [])):
+            for tgt in record_api.reference_values(v):
                 if isinstance(tgt, str) and R.prefix_of_id(tgt): refs.append((rid, field, tgt, rel))
 
 # 2) reference existence
 for src, field, tgt, rel in refs:
     if tgt not in ids:
         errors.append(f"{src}'s {field} references non-existent ID: {tgt}  ({rel})")
+
+# Research-provenance semantics. These are warnings so older records remain valid.
+TARGET_TYPES = {
+    "protocols": {"protocol"}, "pipeline": {"pipeline"}, "scripts": {"script"},
+    "project": {"project"}, "produced_datasets": {"dataset"},
+}
+resource_types = set(R.resource_types())
+TARGET_TYPES["used_resources"] = resource_types
+TARGET_TYPES["produced_resources"] = resource_types - {"dataset"}
+for src, field, tgt, rel in refs:
+    if src == tgt:
+        warnings.append(f"{src}: self-reference in {field}  ({rel})")
+    allowed = TARGET_TYPES.get(field)
+    if allowed and tgt in records and records[tgt].get("type") not in allowed:
+        warnings.append(f"{src}: {field} target {tgt} has type='{records[tgt].get('type')}', "
+                        f"expected {sorted(allowed)}  ({rel})")
+for rid, meta in records.items():
+    for field in REF_FIELDS:
+        value = meta.get(field)
+        values = [value] if isinstance(value, str) else (value or [])
+        strings = [v for v in values if isinstance(v, str)]
+        if len(strings) != len(set(strings)):
+            warnings.append(f"{rid}: duplicate references in {field}  ({ids[rid]})")
 
 # 5) backlink consistency (warn)
 for rid, meta in records.items():
@@ -149,6 +172,50 @@ for rid, meta in records.items():
         for seg in parsed["segments"]:
             if seg["code"] not in V.SEGMENT_CODES:
                 warnings.append(f"{rid}: segment code '{seg['code']}' not registered in vocab.md  ({rel})")
+
+# Lightweight cycle detection for derived_from; warning-only by design.
+parents = {}
+for rid, meta in records.items():
+    value = meta.get("derived_from")
+    parents[rid] = [value] if isinstance(value, str) else [x for x in (value or []) if isinstance(x, str)]
+for start in records:
+    stack = [(start, [start])]
+    while stack:
+        node, path = stack.pop()
+        for parent in parents.get(node, []):
+            if parent == start:
+                warnings.append(f"{start}: derived_from cycle detected: {' -> '.join(path + [parent])}  ({ids[start]})")
+                stack = []
+                break
+            if parent in records and parent not in path:
+                stack.append((parent, path + [parent]))
+
+def _finding(severity, message):
+    path_match = re.search(r"\(([^()]+\.md)\)\s*$", message)
+    rid_match = re.match(r"([A-Z][A-Z0-9-]+)(?:'s|:|\.)", message)
+    field_match = re.search(r"(?:field |in |missing )(?:'([^']+)'|([a-z_]+))", message)
+    return {
+        "severity": severity,
+        "code": re.sub(r"[^a-z0-9]+", "_", message.lower().split("  (")[0])[:80].strip("_"),
+        "id": rid_match.group(1) if rid_match else None,
+        "path": path_match.group(1) if path_match else None,
+        "field": next((g for g in (field_match.groups() if field_match else ()) if g), None),
+        "message": message,
+        "suggestion": "Run the command named in the message." if "run `" in message else None,
+    }
+
+_args = argparse.ArgumentParser(description="Validate the agent-eln record graph.")
+_args.add_argument("--json", action="store_true", help="Emit a stable machine-readable findings document.")
+args, _unknown = _args.parse_known_args()
+
+if args.json:
+    findings = [_finding("warning", w) for w in warnings] + [_finding("error", e) for e in errors]
+    print(json.dumps({
+        "ok": not errors, "schema_version": R.SCHEMA_VERSION,
+        "counts": {"records": len(ids), "references": len(refs), "warnings": len(warnings), "errors": len(errors)},
+        "findings": findings,
+    }, ensure_ascii=False, indent=2))
+    sys.exit(1 if errors else 0)
 
 if warnings:
     print("⚠️  Warnings:"); [print("  -", w) for w in warnings]

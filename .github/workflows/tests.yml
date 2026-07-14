@@ -22,7 +22,16 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Run test suite
         run: pytest tools/tests/ -v
+
+      - name: Validate starter repository
+        run: python tools/validate.py
+
+      - name: Check wiki starter health
+        run: python wiki/scripts/knowledge_pm.py --mode health --root .
+
+      - name: Check generated indexes
+        run: python tools/index.py --check

@@ -292,6 +292,16 @@ def check_11_lit_linkage(lits, all_files):
                            os.path.relpath(p, ROOT)))
     return issues
 
+def check_12_lit_relevance(lits):
+    """Read papers should explain why they matter; warning-only and optional before read."""
+    issues = []
+    for p in lits:
+        meta, _ = parse(p)
+        rid = meta.get("id", "")
+        if rid.startswith("LIT-") and meta.get("status") == "read" and _empty(meta, "why_it_matters"):
+            issues.append((rid, "read paper missing why_it_matters", os.path.relpath(p, ROOT)))
+    return issues
+
 def render_md(sections):
     date = datetime.date.today().isoformat()
     out = [f"# ELN Health Check — {date}\n"]
@@ -329,6 +339,7 @@ def main():
     d9 = check_9_wiki_sync(lits)
     d10 = check_10_lab_readiness(all_files)
     d11 = check_11_lit_linkage(lits, all_files)
+    d12 = check_12_lit_relevance(lits)
 
     sections = [
         ("1. Structural integrity (frontmatter/placeholders)", d1),
@@ -342,11 +353,22 @@ def main():
         ("9. Cross-repo sync (LIT ↔ wiki)", d9),
         (f"10. Lab-readiness completeness ({len(d10)} gaps)", d10),
         (f"11. LIT linkage — {len(d11)}/{len(lits)} unlinked to EXP/IDEA/PRJ",
-         d11[:15]),  # cap to worst 15
+        d11[:15]),  # cap to worst 15
+        (f"12. Read-paper relevance ({len(d12)} gaps)", d12[:15]),
     ]
 
     if args.json:
-        print(json.dumps({t: len(items) for t, items in sections}, ensure_ascii=False))
+        findings = []
+        for section, items in sections:
+            for item in items:
+                if len(item) == 3:
+                    rid, message, path = item
+                    findings.append({"severity": "warning", "code": "health_gap", "id": rid,
+                                     "path": path or None, "field": None, "message": message,
+                                     "section": section, "suggestion": None})
+        print(json.dumps({"ok": True, "counts": {"warnings": len(findings)},
+                          "sections": [{"name": t, "count": len(items)} for t, items in sections],
+                          "findings": findings}, ensure_ascii=False, indent=2))
         return
 
     md = render_md(sections)

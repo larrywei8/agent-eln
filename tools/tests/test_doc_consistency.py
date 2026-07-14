@@ -28,7 +28,21 @@ LIVE_DOCS = [
     os.path.join(ELN_ROOT, "AGENTS.md"),
     os.path.join(ELN_ROOT, "README.md"),
     os.path.join(ELN_ROOT, "conventions.md"),
+    os.path.join(ELN_ROOT, "ROADMAP.md"),
+    os.path.join(ELN_ROOT, "eln", "AGENTS.md"),
+    os.path.join(ELN_ROOT, "lims", "AGENTS.md"),
+    os.path.join(ELN_ROOT, "methods", "AGENTS.md"),
+    os.path.join(ELN_ROOT, "wiki", "AGENTS.md"),
 ]
+
+for base in (os.path.join(ELN_ROOT, "docs"),):
+    if os.path.isdir(base):
+        LIVE_DOCS.extend(
+            os.path.join(dp, fn)
+            for dp, _, files in os.walk(base)
+            for fn in files
+            if fn.endswith(".md") and "history" not in dp.split(os.sep)
+        )
 
 
 def _live_prefixes():
@@ -94,6 +108,13 @@ class TestSchemaVersionExists(unittest.TestCase):
     def test_schema_version_present(self):
         self.assertTrue(hasattr(R, "SCHEMA_VERSION"))
         self.assertRegex(R.SCHEMA_VERSION, r"^\d+\.\d+")
+
+
+class TestLiveDocsHaveNoBrokenLocalClaims(unittest.TestCase):
+    def test_no_inaccessible_baseline_or_missing_porting_doc(self):
+        roadmap = open(os.path.join(ELN_ROOT, "ROADMAP.md"), encoding="utf-8").read()
+        self.assertNotIn("b56d0b5", roadmap)
+        self.assertNotIn("`PORTING.md`", roadmap)
 
 
 if __name__ == "__main__":

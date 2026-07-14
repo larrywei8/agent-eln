@@ -1,7 +1,9 @@
 # ELN Roadmap
 
 **Current schema:** v6.0 (see `python3 tools/registry.py table` for the current type list).
-**Last baseline commit:** `b56d0b5` — Phase 4 baseline (2026-07-13).
+**Distribution baseline:** `v0.3.0` introduced the four-module layout. The populated
+UCSD lab instance and its historical record counts are deployment evidence, not content
+or commit history shipped in this reusable repository.
 **Scope reminder:** this ELN is a **single-lab research knowledge system**, not a
 regulated LIMS. Design choices favor scientific reproducibility, provenance, and
 literature integration over multi-user transaction safety, chain-of-custody, or
@@ -28,14 +30,16 @@ the single-lab research scope.
 - Audited 224-file uncommitted change set (Chinese→English translation +
   Phase 4 additions).
 - Ran forced index rebuild, validation, health check, dashboard, all tests.
-- Committed as `b56d0b5` with baseline stats: **134 records, 8 valid refs,
-  26 types, 0 structural errors, 30/30 tests, 56/56 DOI coverage**.
-- Known warnings deferred: 2 duplicate DOI pairs, 3 LIT wiki_link gaps.
+- The source deployment used for the audit had **134 records, 8 valid refs,
+  26 types, 0 structural errors, 30/30 tests, and 56/56 DOI coverage**. Those
+  figures are historical deployment evidence and are not expected in a fresh clone.
+- Deployment-specific duplicate DOI and wiki-link gaps were resolved before the
+  reusable distribution was extracted.
 
 ### Phase 1 — Documentation drift
-- `ai-eln-keeper` Skill: 21 → 26 types, `MOU`→`MUS`, `PROT`→`SOP`, English labels.
-- `templates/daily-summary.md` and `templates/experiment-wetlab.md`:
-  `PROT` → `SOP`.
+- `ai-eln-keeper` Skill: 21 → 26 types, retired mouse/protocol prefixes replaced
+  by the live `MUS`/`SOP` prefixes, and labels translated to English.
+- `templates/daily-summary.md` and `templates/experiment-wetlab.md` now use `SOP`.
 - `AGENT.md`: removed broken `DESIGN.md` reference.
 - Retired `BASELINE.md`, `SPEC-phase1.md`, `SPEC-phase3.md` after their content
   was folded into this roadmap (still recoverable via git history).
@@ -108,8 +112,8 @@ expected parent, cycles) — but not before there's real data motivating it.
 - **Concurrent multi-user operation**: repository-level locks, ID allocation
   under contention, per-user permissions. Git conflict-resolution and
   single-operator discipline are sufficient.
-- **Backup and disaster recovery drills**: keep documented in `PORTING.md`;
-  rely on git remote + workspace snapshots. Formal restore drills only if
+- **Formal backup and disaster recovery drills**: rely on a private git remote and
+  workspace snapshots. Add a deployment-specific recovery runbook only if
   the ELN starts holding irreplaceable primary data (currently: raw data
   lives in `inbox/` → hashed → referenced, not stored).
 - **Custom UI beyond the dashboard**: Markdown + editor + generated dashboard

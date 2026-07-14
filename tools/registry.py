@@ -30,7 +30,10 @@ Per-field notes:
 import os, csv
 
 # tools/ lives at the repo root, so ROOT = tools/'s parent = repo root.
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(os.environ.get(
+    "AGENT_ELN_REPO_ROOT",
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+))
 
 # Top-level directories that hold no records — walkers must skip them.
 # Substring match against the walked path (kept legacy pattern from earlier tools).
@@ -60,7 +63,7 @@ FORWARD_REF_FIELDS = (
     "used_resources", "produced_resources", "produced_datasets", "derived_from",
     "protocols", "pipeline", "scripts", "produced_in", "instrument",
     "related", "related_experiments", "related_ideas", "inputs", "outputs",
-    "experiments", "members",
+    "related_projects", "related_literature", "experiments", "members", "project",
 )
 
 # —— Backlink derivation rules: experiments declare forward links, and produced_in on the resource side is auto-filled from these ——

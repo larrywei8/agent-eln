@@ -5,7 +5,7 @@ set -u -o pipefail
 # Override with --root or AGENT_ELN_WIKI_ROOT if your wiki lives elsewhere.
 _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="${AGENT_ELN_WIKI_ROOT:-$(cd "$_HERE/../.." && pwd)}"
-SKILL="${LLM_WIKI_ANYGEN:-/home/workspace/Skills/llm-wiki-anygen}"
+SKILL="${LLM_WIKI_ANYGEN:-$ROOT/../Skills/llm-wiki-anygen}"
 BACKUP_ROOT="${AGENT_ELN_OBSIDIAN_BACKUP_ROOT:-$ROOT/.obsidian-sync-backups}"
 REPORT_ROOT="$ROOT/outputs/obsidian-sync"
 APPLY=0
@@ -158,9 +158,9 @@ else
   echo "Lint skipped by --no-lint."
 fi
 
-if git -C /home/workspace rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   GIT_STATUS_LOG="$REPORT_DIR/git-status.log"
-  git -C /home/workspace status --short > "$GIT_STATUS_LOG" 2>&1 || true
+  git -C "$ROOT" status --short > "$GIT_STATUS_LOG" 2>&1 || true
   {
     echo
     echo "## Git Status"

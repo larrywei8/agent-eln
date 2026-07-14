@@ -28,6 +28,13 @@ What the wiki deliberately excludes:
 
 ## Operations
 
+### Core versus optional
+
+The portable core is `wiki/index.md`, Markdown pages with source frontmatter,
+the fast health preflight, ordinary links, and `tools/wiki_sync.py`. Obsidian sync,
+Quarto export, semantic-edge experiments, PM discovery reports, and external
+llm-wiki Skills are optional extensions. A fresh clone must remain healthy without them.
+
 This wiki follows the `llm-wiki-anygen` skill's five operations: `compile`,
 `ingest`, `query`, `lint`, `audit`. Every operation appends an entry to
 `log/YYYYMMDD.md`.

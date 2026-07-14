@@ -8,6 +8,7 @@ title:
 project:                   # PRJ-xxxx  parent project (optional, useful for filtering by project)
 pipeline:                  # PIPE-xxxx
 scripts: []                # SCR-xxxx
+command:                   # exact entrypoint/command used for this run
 inputs:                    # source of raw data
   - dataset: 
     path: 

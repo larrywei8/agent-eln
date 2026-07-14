@@ -21,6 +21,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import fm
 from fm import parse
 import registry as R
+import records as record_api
 
 ROOT = R.ROOT
 
@@ -40,14 +41,7 @@ def resolve_type(arg):
     return None, None, None
 
 def existing_ids_of(t):
-    ids = []
-    for dp, _, fs in os.walk(ROOT):
-        if any(s in dp for s in (".git", "/index", "/templates", "/tools", "/wiki", "/raw", "/docs", "/references", "/inbox")): continue
-        for fn in fs:
-            if not fn.endswith(".md"): continue
-            meta, _ = parse(os.path.join(dp, fn))
-            if meta.get("type") == t and meta.get("id"): ids.append(meta["id"])
-    return ids
+    return record_api.existing_ids(t, ROOT)
 
 def next_id(t, spec, date):
     style, year, pfx = spec["id_style"], date[:4], spec["prefix"]
@@ -163,7 +157,7 @@ if a.dry_run:
 if os.path.exists(path):
     print("Target already exists, aborted:", os.path.relpath(path, ROOT)); sys.exit(1)
 os.makedirs(os.path.dirname(path), exist_ok=True)
-open(path, "w", encoding="utf-8").write(content)
+record_api.atomic_write(path, content)
 
 print(f"✅ Created {rid}  ({spec['label']})")
 print(f"   → {os.path.relpath(path, ROOT)}")

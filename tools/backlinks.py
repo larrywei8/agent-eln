@@ -15,25 +15,28 @@ import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 import fm
 import registry as R
+import records as record_api
 
 ROOT = R.ROOT
 WRITE = "--write" in sys.argv
+if "--help" in sys.argv or "-h" in sys.argv:
+    print(__doc__.strip())
+    print("\n--dry-run computes and prints planned field changes without writing (default).")
+    print("--write applies the planned produced_in changes atomically.")
+    sys.exit(0)
 
 # 1) Collect all record paths in the library
 paths = {}
-for dp, _, fs in os.walk(ROOT):
-    if any(s in dp for s in (".git", "/index", "/templates", "/tools", "/wiki", "/raw", "/docs", "/references", "/inbox")): continue
-    for fn in fs:
-        if not fn.endswith(".md"): continue
-        p = os.path.join(dp, fn); meta, _ = fm.parse(p)
-        if meta.get("id") and "XXXX" not in meta["id"]: paths[meta["id"]] = p
+for p, _rel, meta, _body in record_api.iter_records(ROOT):
+    if meta.get("id") and "XXXX" not in meta["id"]:
+        paths[meta["id"]] = p
 
 # 2) Compute the expected produced_in for each resource from experiments
 want = {}   # resource_id -> exp_id
 for rid, p in paths.items():
     meta, _ = fm.parse(p)
     for src_field, dst_field in R.BACKLINK_RULES:
-        for tgt in (meta.get(src_field) or []):
+        for tgt in record_api.reference_values(meta.get(src_field)):
             if tgt in paths:
                 want.setdefault(tgt, rid)
 
@@ -53,8 +56,7 @@ for res_id, exp_id in want.items():
     new = fm.set_field(txt, "produced_in", exp_id)
     changed.append((res_id, exp_id))
     if WRITE:
-        with open(p, "w", encoding="utf-8") as f:
-            f.write(new)
+        record_api.atomic_write(p, new)
 
 for c in conflicts: print("⚠️ ", c)
 for res_id, exp_id in changed:

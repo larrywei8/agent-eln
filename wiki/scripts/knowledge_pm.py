@@ -1549,6 +1549,13 @@ def main():
     parser.add_argument("--check-online", action="store_true", help="preprint-status: also query Crossref to detect published versions")
     args = parser.parse_args()
 
+    # Accept either the repository root (contains wiki/) or the wiki directory
+    # itself. The module manual historically documented the latter.
+    requested_root = Path(args.root).resolve()
+    if not (requested_root / "wiki").is_dir() and requested_root.name == "wiki":
+        requested_root = requested_root.parent
+    args.root = str(requested_root)
+
     if args.mode == "health":
         sys.exit(run_health(Path(args.root)))
 

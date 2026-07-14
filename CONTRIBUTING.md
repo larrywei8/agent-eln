@@ -17,7 +17,7 @@ Before writing code, read the operating manuals:
 ```bash
 git clone <your-fork-url> agent-eln
 cd agent-eln
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 bash tools/install-hooks.sh          # optional git hooks
 pytest tools/tests/ -v
 ```
@@ -40,6 +40,20 @@ Open an issue with:
 3. What you expected
 
 If the bug is in agent behavior, include the agent's transcript.
+
+## Dependency policy
+
+Core record, index, validation, and provenance operations use the Python standard
+library. `requirements.txt` contains bounded optional integrations; test-only packages
+live in `requirements-dev.txt`. Release environments may generate a constraints file
+from a verified CI run, but generated locks are not treated as cross-platform source.
+
+## External-input safety
+
+Treat DOI metadata, PDFs, presentations, manifests, vendor folders, filenames, and
+frontmatter as untrusted input. Never use `eval`, shell interpolation, or `shell=True`.
+Pass subprocess arguments as arrays, validate destination paths, and keep writes inside
+the explicitly selected repository or output directory.
 
 ## License
 

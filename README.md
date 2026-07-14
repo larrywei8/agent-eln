@@ -43,6 +43,10 @@ python tools/index.py
 python tools/dashboard.py
 ```
 
+For development, also install `requirements-dev.txt`. Run `python tools/validate.py --json`
+for structured agent output and `python tools/index.py --check` to detect stale derived
+indexes without modifying the checkout.
+
 Read **`AGENT.md`** next. That is the operating manual an AI agent needs to run this
 system end-to-end.
 

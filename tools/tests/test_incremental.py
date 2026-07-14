@@ -82,22 +82,16 @@ class Phase1Tests(unittest.TestCase):
         shutil.rmtree(self.root, ignore_errors=True)
 
     def test_1_golden_diff(self):
-        """Full rebuild output CSV / graph.json must be byte-identical to golden.
-
-        Skipped on fresh installs: goldens are lab-specific and must be
-        regenerated locally (see tools/tests/golden/README.md).
-        """
-        golden_files = [f for f in (os.listdir(GOLDEN) if os.path.isdir(GOLDEN) else [])
-                        if not f.startswith((".", "README"))]
-        if not golden_files:
-            self.skipTest("no golden fixtures; regenerate locally per golden/README.md")
+        """Two forced rebuilds of the same fixture are byte-identical."""
         _run(self.root, "--force")
-        for f in golden_files:
-            g = os.path.join(GOLDEN, f)
-            n = os.path.join(self.root, "index", f)
-            self.assertTrue(os.path.exists(n), f"missing output {f}")
-            with open(g, "rb") as a, open(n, "rb") as b:
-                self.assertEqual(a.read(), b.read(), f"byte diff in {f}")
+        before = {os.path.basename(p): open(p, "rb").read()
+                  for p in glob.glob(os.path.join(self.root, "index", "*.csv")) +
+                           glob.glob(os.path.join(self.root, "index", "*.json"))
+                  if not p.endswith(".cache.json")}
+        _run(self.root, "--force")
+        after = {name: open(os.path.join(self.root, "index", name), "rb").read()
+                 for name in before}
+        self.assertEqual(before, after)
 
     def test_2_cache_hit(self):
         """Run twice in a row: second run should have 100% cache hits."""
@@ -159,6 +153,21 @@ class Phase1Tests(unittest.TestCase):
         s = _stats(_run(self.root, "--stats"))
         self.assertGreater(s["parsed"], 0, "registry mtime change should force rebuild")
         self.assertEqual(s["cached"], 0)
+
+    def test_7_check_is_non_mutating_and_detects_stale_output(self):
+        _run(self.root, "--force")
+        target = os.path.join(self.root, "index", "records.csv")
+        before = open(target, "rb").read()
+        ok = subprocess.run([sys.executable, os.path.join(self.root, "tools", "index.py"), "--check"],
+                            cwd=self.root, capture_output=True, text=True)
+        self.assertEqual(ok.returncode, 0, ok.stdout + ok.stderr)
+        with open(target, "a") as f:
+            f.write("stale\n")
+        stale = subprocess.run([sys.executable, os.path.join(self.root, "tools", "index.py"), "--check"],
+                               cwd=self.root, capture_output=True, text=True)
+        self.assertEqual(stale.returncode, 1)
+        self.assertIn("stale generated", stale.stdout)
+        self.assertNotEqual(open(target, "rb").read(), before)
 
 
 if __name__ == "__main__":

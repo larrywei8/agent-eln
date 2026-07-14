@@ -11,6 +11,7 @@ paper_type:           # experimental | computational | review | clinical_trial |
 tags: []
 status: to-read       # to-read → reading → read
 relation:             # optional — supports | contradicts | method-from | background | motivates | replicates | safety
+why_it_matters:       # recommended when status becomes read; one sentence for this lab
 created: {DATE}
 created_by:
 wiki_link:            # wiki/summaries/<slug>.md (relative to the repo root)

@@ -34,6 +34,7 @@ from fm import parse as parse_fm
 import registry as R
 import hierarchy as H
 import vocab as V
+import records as record_api
 
 ROOT = R.ROOT
 
@@ -81,22 +82,8 @@ ANATOMICAL_CODES = {
 
 
 def find_record(rid):
-    """Return absolute path of the .md file whose frontmatter id == rid, else None."""
-    for dp, dnames, fs in os.walk(ROOT):
-        dnames.sort()
-        if any(s in dp for s in (".git", "/index", "/templates", "/tools", "/wiki", "/raw", "/docs", "/references", "/inbox")):
-            continue
-        for fn in fs:
-            if not fn.endswith(".md"):
-                continue
-            p = os.path.join(dp, fn)
-            try:
-                meta, _ = parse_fm(p)
-            except Exception:
-                continue
-            if meta.get("id") == rid:
-                return p, meta
-    return None, None
+    """Return absolute path and metadata for a stable record ID."""
+    return record_api.find_record(rid, ROOT)
 
 
 def slugify(s):
@@ -246,7 +233,7 @@ def main():
         print(f"❌ target already exists: {os.path.relpath(path, ROOT)}")
         sys.exit(1)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    open(path, "w", encoding="utf-8").write(content)
+    record_api.atomic_write(path, content)
 
     print(f"✅ Created {derived_id}  (parent={a.parent_id}, type={target_type})")
     print(f"   → {os.path.relpath(path, ROOT)}")

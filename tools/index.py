@@ -12,17 +12,47 @@ Usage:
   python tools/index.py            # incremental
   python tools/index.py --force    # ignore cache, full rebuild
   python tools/index.py --stats    # print parsed/cached/dropped statistics
+  python tools/index.py --check    # rebuild in a temporary copy; report stale live outputs
 """
-import os, csv, json, sys, glob, subprocess
+import os, csv, json, sys, glob, subprocess, tempfile, shutil, filecmp
 sys.path.insert(0, os.path.dirname(__file__))
 from fm import parse
 import registry as R
+import records as record_api
 
 ROOT = R.ROOT
 IDX = os.path.join(ROOT, "index")
 CACHE_PATH = os.path.join(IDX, ".cache.json")
 DUCKDB_PATH = os.path.join(IDX, "data.duckdb")
 CACHE_VERSION = 2
+
+if "--check" in sys.argv:
+    with tempfile.TemporaryDirectory(prefix="agent-eln-index-check-") as tmp:
+        for name in ("tools", "templates", "eln", "lims", "methods"):
+            src = os.path.join(ROOT, name)
+            if os.path.exists(src):
+                shutil.copytree(src, os.path.join(tmp, name),
+                                ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+        os.makedirs(os.path.join(tmp, "index"), exist_ok=True)
+        proc = subprocess.run([sys.executable, os.path.join(tmp, "tools", "index.py"), "--force"],
+                              cwd=tmp, capture_output=True, text=True)
+        if proc.returncode:
+            print(proc.stdout + proc.stderr, file=sys.stderr)
+            sys.exit(proc.returncode)
+        fresh = os.path.join(tmp, "index")
+        names = sorted({os.path.basename(p) for p in glob.glob(os.path.join(IDX, "*.csv")) +
+                        glob.glob(os.path.join(IDX, "*.json")) if not p.endswith(".cache.json")} |
+                       {os.path.basename(p) for p in glob.glob(os.path.join(fresh, "*.csv")) +
+                        glob.glob(os.path.join(fresh, "*.json")) if not p.endswith(".cache.json")})
+        stale = [name for name in names if not os.path.exists(os.path.join(IDX, name)) or
+                 not os.path.exists(os.path.join(fresh, name)) or
+                 not filecmp.cmp(os.path.join(IDX, name), os.path.join(fresh, name), shallow=False)]
+        if stale:
+            print("stale generated index outputs: " + ", ".join(stale))
+            print("run `python tools/index.py --force` to refresh them")
+            sys.exit(1)
+        print(f"index check passed: {len(names)} generated outputs are current")
+        sys.exit(0)
 
 FORCE = "--force" in sys.argv
 STATS = "--stats" in sys.argv
@@ -62,12 +92,7 @@ def _extract(meta, rel):
            "status": meta.get("status", ""),
            "project": meta.get("project", ""),
            "path": rel}
-    e_list = []
-    for field in R.FORWARD_REF_FIELDS:
-        v = meta.get(field)
-        for tgt in ([v] if isinstance(v, str) else (v or [])):
-            if isinstance(tgt, str) and R.prefix_of_id(tgt):
-                e_list.append({"src": rid, "dst": tgt, "rel": field})
+    e_list = record_api.extract_edges(meta)
     spec = R.TYPES.get(meta["type"], {})
     who_field = spec.get("who_field")
     who = meta.get(who_field) if who_field else None
@@ -78,14 +103,7 @@ def _extract(meta, rel):
     return rec, e_list, who, created_date, tags, doi, paper_type
 
 # ---- Walk (sorted walk for CSV row order stable across machines and runs) -------------------
-for dirpath, dnames, files in os.walk(ROOT):
-    dnames.sort()  # in-place, affects subsequent descent order
-    if R.is_excluded(dirpath):
-        continue
-    for fn in sorted(files):
-        if not fn.endswith(".md"):
-            continue
-        p = os.path.join(dirpath, fn)
+for p in record_api.iter_record_paths(ROOT):
         rel = os.path.relpath(p, ROOT)
         try:
             st = os.stat(p)
@@ -101,7 +119,7 @@ for dirpath, dnames, files in os.walk(ROOT):
                 records.append(rec)
                 edges.extend(hit.get("edges", []))
             continue
-        meta, _ = parse(p)
+        meta, _ = record_api.load_record(p)
         rec, e_list, who, created_date, tags, doi, paper_type = _extract(meta, rel)
         entry = {"mtime_ns": mtime_ns, "size": size,
                  "record": rec, "edges": e_list,

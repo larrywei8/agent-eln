@@ -95,6 +95,11 @@ EXP (experiment) DAILY (daily summary) LIT (literature) IDEA PRJ (project) MTG (
 7. `git add -A && git commit -m "[EXP-...] ..."` (if the hook is installed, index+validate
    run automatically).
 
+Agent-facing checks support stable JSON: `python tools/validate.py --json` and
+`python tools/health.py --json`. Findings include severity, code, record ID, path,
+field, message, and suggested correction where available. Use
+`python tools/index.py --check` for a non-mutating rebuild-and-compare in a temporary copy.
+
 One-time install of the git hook: `bash tools/install-hooks.sh` (if the repo isn't
 initialized, it auto-runs git init). After that, every commit auto-runs index + validate
 and blocks the commit if validation fails.
@@ -163,6 +168,9 @@ ID (`hierarchy.md` rules 1–5). Go deeper than two segments by continuing via
 - **↔ wiki bidirectional link**: the LIT card writes `wiki_link: wiki/summaries/<slug>.md`;
   running `python tools/wiki_sync.py --fix` appends the LIT path to the corresponding
   summary's `sources:`. Use `--check` (default) to inspect without modifying.
+- **Project evidence view**: `python tools/evidence.py PRJ-0001` groups linked LIT cards
+  by recognized optional relation values; `--json` is available. Free-form relations
+  remain valid and appear under `unclassified`.
 - **Clickable wiki link**: the LIT card body must contain one line
   `📖 **Detailed notes**: [slug](../../../<wiki_link>)`. It's auto-rendered by
   `lit_from_doi.py` from the frontmatter `wiki_link`; when `wiki_link` is empty it shows

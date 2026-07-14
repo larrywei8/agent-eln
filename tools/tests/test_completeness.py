@@ -195,6 +195,13 @@ class TestLitLinkage(unittest.TestCase):
         self.assertEqual(len(issues), 1)
         self.assertIn("unlinked", issues[0][1])
 
+    def test_read_lit_without_relevance_is_flagged(self):
+        lit = os.path.join(self.tmp, "LIT-9004.md")
+        _write(lit, ["id: LIT-9004", "type: literature", "title: T", "status: read"])
+        issues = H.check_12_lit_relevance([lit])
+        self.assertEqual(len(issues), 1)
+        self.assertIn("why_it_matters", issues[0][1])
+
 
 if __name__ == "__main__":
     unittest.main()

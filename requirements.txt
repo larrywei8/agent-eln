@@ -2,10 +2,9 @@
 # Only Python 3 standard library is used, works out-of-the-box in any environment with python3.
 #
 # The following are installed as needed:
-duckdb>=0.10        # tools/index.py / tools/query.py — SQL query layer (skips data.duckdb if not installed)
-biopython>=1.80     # tools/gb_annotate.py — parse .gb plasmid maps to auto-fill cards
-python-pptx>=0.6    # tools/ppt2md.py     — convert PPT to AI-readable markdown
-markitdown          # tools/lit_from_pdf.py — PDF → text extraction (optional, zo-pdf-to-markdown also works)
-pytest>=7.0         # tools/tests/ — test runner (dev only)
+duckdb>=0.10,<2     # tools/index.py / tools/query.py — optional SQL query layer
+biopython>=1.80,<2  # tools/gb_annotate.py — optional GenBank parsing
+python-pptx>=0.6,<2 # tools/ppt2md.py — optional PPT conversion
+markitdown>=0.1,<1  # tools/lit_from_pdf.py — optional PDF text extraction
 #
 # Install (optional):  pip install -r requirements.txt
