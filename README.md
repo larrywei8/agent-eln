@@ -1,5 +1,16 @@
 # Agent ELN
 
+> [!TIP]
+> **Install Agent ELN with one prompt**
+>
+> Using Codex, Claude Code, OpenClaw, Hermes, Zo Computer, or another coding agent?
+> Give it this prompt:
+>
+> `Install Agent ELN from https://github.com/larrywei8/agent-eln into a new agent-eln folder and follow its installation instructions.`
+>
+> Your agent will clone, configure, validate, and test a clean workspace by following
+> [`INSTALL.md`](INSTALL.md).
+
 [![tests](https://github.com/larrywei8/agent-eln/actions/workflows/tests.yml/badge.svg)](https://github.com/larrywei8/agent-eln/actions/workflows/tests.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -186,17 +197,6 @@ without creating a second source of truth:
 - machine-readable JSON for agents and automations.
 
 Run `python tools/dashboard.py`, then open `index/dashboard.html` locally.
-
-## Install with your AI agent
-
-Using Codex, Claude Code, OpenClaw, Hermes, Zo Computer, or another coding agent? Give
-it this one prompt:
-
-> Install Agent ELN from https://github.com/larrywei8/agent-eln into a new `agent-eln`
-> folder and follow its installation instructions.
-
-Your agent will clone, configure, validate, and test a clean Agent ELN workspace by
-following [`INSTALL.md`](INSTALL.md).
 
 ## Quick start
 
